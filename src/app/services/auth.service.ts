@@ -7,33 +7,45 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
 
+  private apiUrl: string = environment.apiEndpoint;
+
   constructor(private router: Router) {
 
   }
 
-  public async signIn() {
+  public async getAuthenticatedUser(): Promise<{ name: string }> {
 
-  }
+    try {
+      let response = await fetch(`${this.apiUrl}/user`, {
+        credentials: 'include'
+      });
 
-  public isAuthenticated(): boolean {
+      let user = await response.json();
 
-    return false;
+      return user
+
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   public async getToken(code: string): Promise<boolean> {
 
     try {
 
-      let response = await fetch(`${environment.apiEndpoint}/auth/getToken`, {
+      let response = await fetch(`${this.apiUrl}/auth/getToken`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
+        credentials: 'include',
         body: JSON.stringify({
           code: code,
           redirect: location.origin
         })
       });
+
+
 
       return response?.status == 200
     } catch (err) {
@@ -46,7 +58,7 @@ export class AuthService {
 
     try {
 
-      let response = await fetch(`${environment.apiEndpoint}/auth/authUrl?redirect=${location.origin}`);
+      let response = await fetch(`${this.apiUrl}/auth/authUrl?redirect=${location.origin}`);
 
       let url = await response.text();
 

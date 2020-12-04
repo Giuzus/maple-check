@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 //Declarations
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component';
+import { HeaderComponent } from './components/application/header/header.component';
 
 //Imports
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,9 +12,11 @@ import { AppRoutingModule } from './app.routing.module';
 //Providers
 import { CookieService } from 'ngx-cookie-service';
 import { LoginComponent } from './components/login/login.component';
-import { QuestsComponent } from './components/quests/quests.component';
+import { QuestsComponent } from './components/application/quests/quests.component';
 import { AuthService } from './services/auth.service';
-import { HomeComponent } from './components/home/home.component';
+import { HomeComponent } from './components/application/home/home.component';
+import { ApplicationComponent } from './components/application/application.component';
+import { BossesComponent } from './components/application/bosses/bosses.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { HomeComponent } from './components/home/home.component';
     LoginComponent,
     QuestsComponent,
     HomeComponent,
+    ApplicationComponent,
+    BossesComponent,
   ],
   imports: [
     BrowserModule,

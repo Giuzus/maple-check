@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
+import { HomeComponent } from './components/application/home/home.component';
 import { LoginComponent } from './components/login/login.component';
-import { QuestsComponent } from './components/quests/quests.component';
+import { QuestsComponent } from './components/application/quests/quests.component';
 import { AuthenticationGuard } from './guards/authentication.guard';
+import { BossesComponent } from './components/application/bosses/bosses.component';
 
 const routes: Routes = [
   {
@@ -16,11 +17,20 @@ const routes: Routes = [
     children: [
       {
         path: '',
+        redirectTo: 'home',
+        pathMatch: 'full'
+      },
+      {
+        path: 'home',
         component: HomeComponent
       },
       {
         path: 'quests',
         component: QuestsComponent
+      },
+      {
+        path: 'bosses',
+        component: BossesComponent
       }
     ]
   }
