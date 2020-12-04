@@ -5,6 +5,7 @@ import { LoginComponent } from './components/login/login.component';
 import { QuestsComponent } from './components/application/quests/quests.component';
 import { AuthenticationGuard } from './guards/authentication.guard';
 import { BossesComponent } from './components/application/bosses/bosses.component';
+import { ApplicationComponent } from './components/application/application.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,7 @@ const routes: Routes = [
   {
     path: '',
     canActivate: [AuthenticationGuard],
+    component: ApplicationComponent,
     children: [
       {
         path: '',

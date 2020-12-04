@@ -9,7 +9,11 @@ export class QuestsComponent implements OnInit {
 
   constructor() { }
 
+  
+
   ngOnInit(): void {
   }
+
+  
 
 }

@@ -1,24 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
+import { FetchService } from './fetch.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private apiUrl: string = environment.apiEndpoint;
-
-  constructor(private router: Router) {
+  constructor(private router: Router, private fetchService: FetchService) {
 
   }
 
   public async getAuthenticatedUser(): Promise<{ name: string }> {
 
     try {
-      let response = await fetch(`${this.apiUrl}/user`, {
-        credentials: 'include'
-      });
+      let response = await this.fetchService.get(`user`);
 
       let user = await response.json();
 
@@ -33,19 +29,12 @@ export class AuthService {
 
     try {
 
-      let response = await fetch(`${this.apiUrl}/auth/getToken`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        credentials: 'include',
-        body: JSON.stringify({
-          code: code,
-          redirect: location.origin
-        })
-      });
+      let body = {
+        code: code,
+        redirect: location.origin
+      }
 
-
+      let response = await this.fetchService.post('auth/getToken', body);
 
       return response?.status == 200
     } catch (err) {
@@ -58,7 +47,7 @@ export class AuthService {
 
     try {
 
-      let response = await fetch(`${this.apiUrl}/auth/authUrl?redirect=${location.origin}`);
+      let response = await this.fetchService.get(`auth/authUrl?redirect=${location.origin}`);
 
       let url = await response.text();
 

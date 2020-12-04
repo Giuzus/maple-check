@@ -26,7 +26,7 @@ import { BossesComponent } from './components/application/bosses/bosses.componen
     QuestsComponent,
     HomeComponent,
     ApplicationComponent,
-    BossesComponent,
+    BossesComponent
   ],
   imports: [
     BrowserModule,
