@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { FetchService } from './fetch.service';
 import { User } from '../models/User';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +53,7 @@ export class AuthService {
 
     try {
 
-      let response = await this.fetchService.get(`auth/authUrl?redirect=${location.origin}`);
+      let response = await this.fetchService.get(`auth/authUrl?redirect=${environment.redirectUrl}`);
 
       let url = await response.text();
 
