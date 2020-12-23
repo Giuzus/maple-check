@@ -37,7 +37,7 @@ export class AuthService {
 
       let body = {
         code: code,
-        redirect: location.origin
+        redirect: environment.redirectUrl
       }
 
       let response = await this.fetchService.post('auth/getToken', body);
