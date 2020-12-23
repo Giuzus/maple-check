@@ -17,6 +17,7 @@ import { AuthService } from './services/auth.service';
 import { HomeComponent } from './components/application/home/home.component';
 import { ApplicationComponent } from './components/application/application.component';
 import { BossesComponent } from './components/application/bosses/bosses.component';
+import { QuestListComponent } from './components/application/quests/quest-list/quest-list.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { BossesComponent } from './components/application/bosses/bosses.componen
     QuestsComponent,
     HomeComponent,
     ApplicationComponent,
-    BossesComponent
+    BossesComponent,
+    QuestListComponent
   ],
   imports: [
     BrowserModule,

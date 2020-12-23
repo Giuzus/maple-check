@@ -1,27 +1,32 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { FetchService } from './fetch.service';
+import { User } from '../models/User';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+
+  public authenticatedUser: User;
+
   constructor(private router: Router, private fetchService: FetchService) {
 
   }
 
-  public async getAuthenticatedUser(): Promise<{ name: string }> {
+  public async getAuthenticatedUser(): Promise<boolean> {
 
     try {
       let response = await this.fetchService.get(`user`);
 
-      let user = await response.json();
+      this.authenticatedUser = await response.json();
 
-      return user
+      return response.status == 200;
 
     } catch (err) {
       console.log(err);
+      return false;
     }
   }
 
