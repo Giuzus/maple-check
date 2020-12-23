@@ -41,7 +41,7 @@ export class AuthService {
 
       let response = await this.fetchService.post('auth/getToken', body);
 
-      return response?.status == 200
+      return (response && response.status == 200);
     } catch (err) {
       console.error(err);
     }

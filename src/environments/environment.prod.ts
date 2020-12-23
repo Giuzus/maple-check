@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiEndpoint: ''
+  apiEndpoint: 'https://maple-check-api.herokuapp.com/'
 };
