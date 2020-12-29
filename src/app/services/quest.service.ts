@@ -11,7 +11,7 @@ export class QuestService {
 
   public async getQuests(date: Date): Promise<Quest[]> {
     try {
-      let response = await this.fetchService.get(`quests/${date.toDateString()}`);
+      let response = await this.fetchService.get(`quests/${date.toUTCString()}`);
 
       let quests: Quest[] = await response.json();
 
@@ -30,7 +30,7 @@ export class QuestService {
       {
         id: questId,
         completed: checked,
-        date: date.toDateString()
+        date: date.toUTCString()
       });
 
       return response.ok;

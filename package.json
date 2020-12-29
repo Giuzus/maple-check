@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build-prod": "ng build --base-href=\"https://giuzus.github.io/maple-check/\" --prod --output-path \"docs\"",
+    "build-prod": "ng deploy --base-href=https://giuzus.github.io/maple-check/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
