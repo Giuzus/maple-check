@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -8,13 +9,26 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private authService:AuthService) { }
+  constructor(private authService: AuthService, public router: Router) { }
 
-  Username: String;
+  public Username: String;
+
+  public ServerTime: string;
 
   ngOnInit(): void {
-    
-      this.Username = this.authService.authenticatedUser.name;
+
+    this.startServerTimer();
+    this.Username = this.authService.authenticatedUser.name;
 
   }
+
+  startServerTimer() {
+    setInterval(() => {
+
+      this.ServerTime = new Date().toUTCString();
+
+    }, 1000);
+  }
+
+
 }
