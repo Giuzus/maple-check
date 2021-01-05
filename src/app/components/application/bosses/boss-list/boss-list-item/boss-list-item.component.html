@@ -1,0 +1,11 @@
+<li class="list-group-item">
+    <label class="boss-list-label" for="{{boss._id}}">
+        <input id="{{boss._id}}" type="checkbox" (change)="bossStateChanged(boss._id, $event)"
+            [checked]="boss.completed" [disabled]="loading" />
+        {{ boss.name }}
+
+        <div class="spinner-border text-primary" role="status" *ngIf="loading">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </label>
+</li>

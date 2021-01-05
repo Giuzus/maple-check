@@ -1,6 +1,4 @@
 <li class="list-group-item">
-
-
     <label class="quest-list-label" for="{{quest._id}}">
         <input id="{{quest._id}}" type="checkbox" (change)="questStateChanged(quest._id, $event)"
             [checked]="quest.completed" [disabled]="loading" />

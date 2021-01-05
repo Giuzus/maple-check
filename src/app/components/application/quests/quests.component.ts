@@ -14,8 +14,6 @@ export class QuestsComponent implements OnInit {
   public dailyQuests: Quest[];
   public weeklyQuests: Quest[];
 
-  
-
   constructor(private questService: QuestService) { }
 
 
@@ -28,8 +26,19 @@ export class QuestsComponent implements OnInit {
       .then(quests => {
         this.quests = quests;
 
-        this.dailyQuests = quests.filter(x => x.type == "DAILY");
-        this.weeklyQuests = quests.filter(x => x.type == "WEEKLY");
+        this.dailyQuests = quests.filter(x => x.type == "DAILY").sort((a, b) => this.compare(a.order, b.order));
+        this.weeklyQuests = quests.filter(x => x.type == "WEEKLY").sort((a, b) => this.compare(a.order, b.order));
       });
   }
+
+  compare(a, b) {
+    if (a < b) {
+      return -1;
+    }
+    if (a > b) {
+      return 1;
+    }
+    return 0;
+  }
+
 }

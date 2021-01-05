@@ -19,6 +19,8 @@ import { ApplicationComponent } from './components/application/application.compo
 import { BossesComponent } from './components/application/bosses/bosses.component';
 import { QuestListComponent } from './components/application/quests/quest-list/quest-list.component';
 import { QuestListItemComponent } from './components/application/quests/quest-list/quest-list-item/quest-list-item.component';
+import { BossListComponent } from './components/application/bosses/boss-list/boss-list.component';
+import { BossListItemComponent } from './components/application/bosses/boss-list/boss-list-item/boss-list-item.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { QuestListItemComponent } from './components/application/quests/quest-li
     ApplicationComponent,
     BossesComponent,
     QuestListComponent,
-    QuestListItemComponent
+    QuestListItemComponent,
+    BossListComponent,
+    BossListItemComponent
   ],
   imports: [
     BrowserModule,
