@@ -1,11 +1,19 @@
-<li class="list-group-item">
-    <label class="quest-list-label" for="{{quest._id}}">
-        <input id="{{quest._id}}" type="checkbox" (change)="questStateChanged(quest._id, $event)"
-            [checked]="quest.completed" [disabled]="loading" />
-        {{ quest.name }}
-
-        <div class="spinner-border text-primary" role="status" *ngIf="loading">
-            <span class="sr-only">Loading...</span>
+<label for="{{quest._id}}">
+    <div class="card" style="width: 14rem;">
+        <img class="card-img-top" src="{{quest.image}}">
+        <div class="card-body">
+            <label class="card-text">
+                <input id="{{quest._id}}" type="checkbox" (change)="questStateChanged(quest._id, $event)"
+                    [checked]="quest.completed" [disabled]="loading" />
+                {{quest.name}}
+            </label>
         </div>
-    </label>
-</li>
+        <div class="loader-container" *ngIf="loading">
+            <div class="backdrop"></div>
+            <div class="spinner-border text-primary" role="status" >
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+       
+    </div>
+</label>

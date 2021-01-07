@@ -1,11 +1,19 @@
-<li class="list-group-item">
-    <label class="boss-list-label" for="{{boss._id}}">
-        <input id="{{boss._id}}" type="checkbox" (change)="bossStateChanged(boss._id, $event)"
-            [checked]="boss.completed" [disabled]="loading" />
-        {{ boss.name }}
-
-        <div class="spinner-border text-primary" role="status" *ngIf="loading">
-            <span class="sr-only">Loading...</span>
+<label for="{{boss._id}}">
+    <div class="card" style="width: 14rem;">
+        <img class="card-img-top" src="{{boss.image}}">
+        <div class="card-body">
+            <label class="card-text">
+                <input id="{{boss._id}}" type="checkbox" (change)="bossStateChanged(boss._id, $event)"
+                    [checked]="boss.completed" [disabled]="loading" />
+                {{boss.name}}
+            </label>
         </div>
-    </label>
-</li>
+        <div class="loader-container" *ngIf="loading">
+            <div class="backdrop"></div>
+            <div class="spinner-border text-primary" role="status" >
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+       
+    </div>
+</label>
