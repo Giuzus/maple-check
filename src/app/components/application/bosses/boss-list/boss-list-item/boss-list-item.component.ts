@@ -22,7 +22,10 @@ export class BossListItemComponent implements OnInit {
 
     this.loading = true;
 
-    await this.bossService.ChangeBossState(bossId, event.currentTarget.checked, new Date());
+    let checked = event.currentTarget.checked
+    await this.bossService.ChangeBossState(bossId,checked , new Date());
+
+    this.boss.completed = checked;
 
     this.loading = false;
   }

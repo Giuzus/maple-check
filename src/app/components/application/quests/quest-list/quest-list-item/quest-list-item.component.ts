@@ -22,7 +22,11 @@ export class QuestListItemComponent implements OnInit {
 
     this.loading = true;
 
-    await this.questService.ChangeQuestState(questId, event.currentTarget.checked, new Date());
+    let checked = event.currentTarget.checked;
+
+    await this.questService.ChangeQuestState(questId, checked , new Date());
+
+    this.quest.completed = checked;
 
     this.loading = false;
   }

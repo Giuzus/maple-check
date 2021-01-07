@@ -1,5 +1,5 @@
 <label for="{{quest._id}}">
-    <div class="card" style="width: 14rem;">
+    <div class="card " [ngClass]="{'bg-success': quest.completed, 'bg-secondary': !quest.completed}" style="width: 14rem;">
         <img class="card-img-top" src="{{quest.image}}">
         <div class="card-body">
             <label class="card-text">

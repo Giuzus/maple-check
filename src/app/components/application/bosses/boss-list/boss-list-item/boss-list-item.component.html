@@ -1,5 +1,5 @@
 <label for="{{boss._id}}">
-    <div class="card" style="width: 14rem;">
+    <div class="card" [ngClass]="{'bg-success': boss.completed, 'bg-secondary': !boss.completed}" style="width: 14rem;">
         <img class="card-img-top" src="{{boss.image}}">
         <div class="card-body">
             <label class="card-text">
