@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/services/Auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -23,12 +23,14 @@ export class HeaderComponent implements OnInit {
   }
 
   startServerTimer() {
+    this.SetHeaderTime(); //so it doesnt wait one second before showing in the first place
+    
     setInterval(() => {
-
-      this.ServerTime = new Date().toUTCString();
-
+      this.SetHeaderTime();
     }, 1000);
   }
 
-
+  private SetHeaderTime() {
+    this.ServerTime = new Date().toUTCString();
+  }
 }

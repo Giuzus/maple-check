@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Quest } from 'src/app/models/Quest';
-import { QuestService } from 'src/app/services/quest.service';
+import { QuestService } from 'src/app/services/Quest/quest.service';
 
 @Component({
   selector: 'app-quest-list-item',

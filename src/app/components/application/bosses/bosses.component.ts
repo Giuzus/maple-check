@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Boss } from 'src/app/models/Boss';
-import { BossService } from 'src/app/services/boss.service';
+import { BossService } from 'src/app/services/Boss/boss.service';
 
 @Component({
   selector: 'app-bosses',

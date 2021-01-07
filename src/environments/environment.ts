@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   apiEndpoint: 'http://localhost:5001',
+  // apiEndpoint: 'https://maple-check-api.herokuapp.com',
   redirectUrl: 'http://localhost:4200'
 };
 
