@@ -14,15 +14,4 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     
   }
-
-  toast() {
-    this.toastService.show("Ayy","Mah man");
-  }
-  modal() {
-    this.modalService.show("Pipi","Weenie kkkkk");
-  }
-
-  throwError(){
-    throw new Error("AAAAAAA");
-  }
 }
