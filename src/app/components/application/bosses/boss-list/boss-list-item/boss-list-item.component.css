@@ -19,7 +19,7 @@
 .backdrop{
     position: absolute;
     background:black;
-    opacity: 40%;
+    opacity: 0.4;
     height: 100%;
     width: 100%;
     left: 0;
