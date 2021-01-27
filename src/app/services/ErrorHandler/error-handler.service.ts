@@ -21,8 +21,15 @@ export class ErrorHandlerService implements ErrorHandler {
 
   handleError(error): void {
 
+    if (error.rejection instanceof AuthError) {
+      this.modalService.show("Authentication error", "Refreshing token");
+
+      this.authService.signIn();
+      return;
+    }
+
     this.modalService.show("ERROR", error.message)
     console.error(error);
-    
+
   }
 }
