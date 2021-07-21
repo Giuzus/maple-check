@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/application/home/home.component';
 import { LoginComponent } from './components/login/login.component';
-import { QuestsComponent } from './components/application/quests/quests.component';
 import { AuthenticationGuard } from './guards/authentication.guard';
-import { BossesComponent } from './components/application/bosses/bosses.component';
 import { ApplicationComponent } from './components/application/application.component';
+import { TasksComponent } from './components/application/tasks/tasks.component';
+import { NewTaskComponent } from './components/application/tasks/new-task/new-task.component';
 
 const routes: Routes = [
   {
@@ -27,12 +27,16 @@ const routes: Routes = [
         component: HomeComponent
       },
       {
-        path: 'quests',
-        component: QuestsComponent
+        path: 'tasks',
+        component: TasksComponent
       },
       {
-        path: 'bosses',
-        component: BossesComponent
+        path: 'tasks/new',
+        component: NewTaskComponent
+      },
+      {
+        path: 'tasks/edit/:id',
+        component: NewTaskComponent
       }
     ]
   }

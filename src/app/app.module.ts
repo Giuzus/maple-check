@@ -12,19 +12,18 @@ import { AppRoutingModule } from './app.routing.module';
 //Providers
 import { CookieService } from 'ngx-cookie-service';
 import { LoginComponent } from './components/login/login.component';
-import { QuestsComponent } from './components/application/quests/quests.component';
 import { AuthService } from './services/Auth/auth.service';
 import { HomeComponent } from './components/application/home/home.component';
 import { ApplicationComponent } from './components/application/application.component';
-import { BossesComponent } from './components/application/bosses/bosses.component';
-import { QuestListComponent } from './components/application/quests/quest-list/quest-list.component';
-import { QuestListItemComponent } from './components/application/quests/quest-list/quest-list-item/quest-list-item.component';
-import { BossListComponent } from './components/application/bosses/boss-list/boss-list.component';
-import { BossListItemComponent } from './components/application/bosses/boss-list/boss-list-item/boss-list-item.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { ErrorHandlerService } from './services/ErrorHandler/error-handler.service';
 import { ToastComponent } from './components/toast/toast.component';
 import { ToastService } from './services/Toast/toast.service';
+import { TasksComponent } from './components/application/tasks/tasks.component';
+import { TaskFormComponent } from './components/application/tasks/task-form/task-form.component';
+import { NewTaskComponent } from './components/application/tasks/new-task/new-task.component';
+import { FormsModule } from '@angular/forms';
+import { EnumToArrayPipe } from './pipes/enum-to-array.pipe';
 
 
 @NgModule({
@@ -32,21 +31,20 @@ import { ToastService } from './services/Toast/toast.service';
     AppComponent,
     HeaderComponent,
     LoginComponent,
-    QuestsComponent,
     HomeComponent,
     ApplicationComponent,
-    BossesComponent,
-    QuestListComponent,
-    QuestListItemComponent,
-    BossListComponent,
-    BossListItemComponent,
     ModalComponent,
-    ToastComponent
+    ToastComponent,
+    TasksComponent,
+    TaskFormComponent,
+    NewTaskComponent,
+    EnumToArrayPipe
   ],
   imports: [
     BrowserModule,
     NgbModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule 
   ],
   providers: [
     {

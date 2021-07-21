@@ -1,4 +1,4 @@
-export class Boss {
+export class Task {
     public _id: string;
     public type: string;
     public name: string;

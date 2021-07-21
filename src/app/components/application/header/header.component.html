@@ -2,11 +2,8 @@
     <li ngbNavItem [ngbNavItem]="'/home'">
         <a ngbNavLink routerLink="home" >Home</a>
     </li>
-    <li ngbNavItem [ngbNavItem]="'/quests'">
-        <a ngbNavLink routerLink="quests">Quests</a>
-    </li>
-    <li ngbNavItem [ngbNavItem]="'/bosses'">
-        <a ngbNavLink routerLink="bosses">Bosses</a>
+    <li ngbNavItem [ngbNavItem]="'/tasks'">
+        <a ngbNavLink routerLink="tasks" >Tasks</a>
     </li>
     <li ngbNavItem [disabled]="true" class="ml-auto" *ngIf="ServerTime" >
         <a ngbNavLink> Server time: {{ServerTime}} </a>
