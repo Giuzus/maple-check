@@ -6,6 +6,7 @@ import { AuthenticationGuard } from './guards/authentication.guard';
 import { ApplicationComponent } from './components/application/application.component';
 import { TasksComponent } from './components/application/tasks/tasks.component';
 import { NewTaskComponent } from './components/application/tasks/new-task/new-task.component';
+import { EditTaskComponent } from './components/application/tasks/edit-task/edit-task.component';
 
 const routes: Routes = [
   {
@@ -36,7 +37,7 @@ const routes: Routes = [
       },
       {
         path: 'tasks/edit/:id',
-        component: NewTaskComponent
+        component: EditTaskComponent
       }
     ]
   }

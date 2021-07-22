@@ -24,6 +24,7 @@ import { TaskFormComponent } from './components/application/tasks/task-form/task
 import { NewTaskComponent } from './components/application/tasks/new-task/new-task.component';
 import { FormsModule } from '@angular/forms';
 import { EnumToArrayPipe } from './pipes/enum-to-array.pipe';
+import { EditTaskComponent } from './components/application/tasks/edit-task/edit-task.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { EnumToArrayPipe } from './pipes/enum-to-array.pipe';
     TasksComponent,
     TaskFormComponent,
     NewTaskComponent,
-    EnumToArrayPipe
+    EnumToArrayPipe,
+    EditTaskComponent
   ],
   imports: [
     BrowserModule,

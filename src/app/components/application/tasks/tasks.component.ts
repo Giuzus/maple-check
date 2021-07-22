@@ -21,4 +21,10 @@ export class TasksComponent implements OnInit {
         this.tasks = tasks;
       });
   }
+
+  async delete(id: string){
+    await this.taskService.delete(id);
+    
+    this.tasks = this.tasks.filter((item) => item._id != id);
+  }
 }

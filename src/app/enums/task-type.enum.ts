@@ -1,4 +1,4 @@
 export enum TaskType {
-  BOSS = "boss",
-  QUEST = "quest",
+  Boss = "BOSS",
+  Quest = "QUEST",
 }

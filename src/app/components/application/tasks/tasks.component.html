@@ -1,6 +1,6 @@
 <div class="content">
 
-    <h1>Tasks</h1>
+    <button routerLink="new">Create task</button>
 
 
     <table class="table table-striped">
@@ -9,6 +9,15 @@
                 <th>
                     Task
                 </th>
+                <th>
+                    Type
+                </th>
+                <th>
+                    Repeats
+                </th>
+                <th>
+                    Actions
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -16,9 +25,16 @@
                 <td>
                     {{ task.name }}
                 </td>
+                <td>
+                    {{ task.type }}
+                </td>
+                <td>
+                    {{ task.repeats }}
+                </td>
+                <td>
+                    <a [routerLink]="['edit',task._id]">Edit</a> | <a role="button" (click)="delete(task._id)">Delete</a>
+                </td>
             </tr>
         </tbody>
     </table>
-
 </div>
-
