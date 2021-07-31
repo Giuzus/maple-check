@@ -1,32 +1,67 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Task } from 'src/app/models/Task';
 import { FetchService } from '../Fetch/fetch.service';
-import { ToastService } from '../Toast/toast.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
-  
-  constructor(private fetchService: FetchService, private toastService: ToastService) { }
 
-  public async getAllTasks(): Promise<Task[]> {
+  // private todayTasks: Task[];
+  // public todayTasksChanged = new EventEmitter<Task[]>();
+
+  private tasks: Task[];
+  public tasksChanged = new EventEmitter<Task[]>();
+
+  constructor(private fetchService: FetchService) {
+    //this.fetchTodayTasks();
+    this.fetchTasks();
+  }
+
+  // public getTodayTasks(): Task[] {
+  //   return this.todayTasks?.slice();
+  // }
+
+  // private async fetchTodayTasks(): Promise<void> {
+  //   //TODO: fix backend route
+  //   let date = new Date();
+  //   let response = await this.fetchService.get(`tasks/${date.getTime()}`);
+  //   this.todayTasks = await response.json();
+  //   this.emitTodayTasksChanged();
+  // }
+
+  // private emitTodayTasksChanged() {
+  //   this.todayTasksChanged.emit(this.getTodayTasks());
+  // }
+
+  public getTasks(): Task[] {
+    return this.tasks?.slice();
+  }
+
+  public async fetchTasks(): Promise<void> {
 
     let response = await this.fetchService.get(`tasks`);
-
-    let tasks: Task[] = await response.json();
-
-    return tasks;
+    this.tasks = await response.json();
+    console.log(this.tasks);
+    this.emitTasksChanged();
   }
 
-  public async getTasks(date: Date, type: String): Promise<Task[]> {
-
-    let response = await this.fetchService.get(`tasks/${type}/${date.getTime()}`);
-
-    let tasks: Task[] = await response.json();
-
-    return tasks;
+  private emitTasksChanged() {
+    this.tasksChanged.emit(this.getTasks());
+    console.log(this.getTasks());
   }
+
+  // public async changeTaskState(taskId: string, checked: boolean, date: Date): Promise<boolean> {
+
+  //   let response = await this.fetchService.post('tasks/changestate',
+  //     {
+  //       id: taskId,
+  //       completed: checked,
+  //       date: date.toUTCString()
+  //     });
+
+  //   return response.ok;
+  // }
 
   public async getTask(id: String): Promise<Task> {
 
@@ -37,42 +72,33 @@ export class TaskService {
     return task;
   }
 
-  async changeTaskState(taskId: string, checked: boolean, date: Date): Promise<boolean> {
-
-    let response = await this.fetchService.post('tasks/changestate',
-      {
-        id: taskId,
-        completed: checked,
-        date: date.toUTCString()
-      });
-
-    return response.ok;
-  }
-
-  async create(task: Task): Promise<Task> {
+  async create(task: Task): Promise<void> {
 
     let response = await this.fetchService.post('tasks', task);
+
     if (response.ok) {
-      return await response.json();
-    }
-    else{
-      throw new Error(await response.text());
+      let createdTask = await response.json();
+      this.tasks.push(createdTask);
+      this.emitTasksChanged()
     }
   }
 
-  async update(task: Task): Promise<Task> {
+  async update(task: Task): Promise<void> {
 
     let response = await this.fetchService.put('tasks', task);
-    if (response.ok) {
-      return await response.json();
-    }
-    else{
-      throw new Error(await response.text());
+    if(response.ok){
+      let updatedTask = await response.json();
+      this.tasks = this.tasks.filter(t => t._id != updatedTask._id);
+      this.tasks.push(updatedTask);
+      this.emitTasksChanged();
     }
   }
 
   async delete(id: string) {
-    let response = await this.fetchService.delete("tasks", {id: id });
+    let response = await this.fetchService.delete("tasks", { id: id });
+    if(response.ok){
+      this.tasks = this.tasks.filter(t => t._id != id);
+      this.emitTasksChanged();
+    }
   }
-
 }

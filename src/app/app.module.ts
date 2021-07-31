@@ -7,7 +7,7 @@ import { HeaderComponent } from './components/application/header/header.componen
 //Imports
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AppRoutingModule } from './app.routing.module';
+import { AppRoutingModule } from './submodules/app.routing.module';
 
 //Providers
 import { CookieService } from 'ngx-cookie-service';
@@ -23,8 +23,13 @@ import { TasksComponent } from './components/application/tasks/tasks.component';
 import { TaskFormComponent } from './components/application/tasks/task-form/task-form.component';
 import { NewTaskComponent } from './components/application/tasks/new-task/new-task.component';
 import { FormsModule } from '@angular/forms';
-import { EnumToArrayPipe } from './pipes/enum-to-array.pipe';
+import { EnumToArrayPipe } from './pipes/enum-to-array/enum-to-array.pipe';
 import { EditTaskComponent } from './components/application/tasks/edit-task/edit-task.component';
+import { CharactersComponent } from './components/application/characters/characters.component';
+import { LoaderComponent } from './components/loader/loader.component';
+import { CharacterFormComponent } from './components/application/characters/character-form/character-form.component';
+import { NewCharacterComponent } from './components/application/characters/new-character/new-character.component';
+import { EditCharacterComponent } from './components/application/characters/edit-character/edit-character.component';
 
 
 @NgModule({
@@ -40,7 +45,12 @@ import { EditTaskComponent } from './components/application/tasks/edit-task/edit
     TaskFormComponent,
     NewTaskComponent,
     EnumToArrayPipe,
-    EditTaskComponent
+    EditTaskComponent,
+    CharactersComponent,
+    LoaderComponent,
+    CharacterFormComponent,
+    NewCharacterComponent,
+    EditCharacterComponent
   ],
   imports: [
     BrowserModule,

@@ -1,40 +1,51 @@
-<div class="content">
+<h2>Tasks</h2>
 
-    <button routerLink="new">Create task</button>
+<button routerLink="new">New task</button>
 
+<table *ngIf="tasks; else loader" class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                Task
+            </th>
+            <th>
+                Type
+            </th>
+            <th>
+                Repeats
+            </th>
+            <th>
+                Default
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let task of tasks">
+            <td>
+                {{ task.name }}
+            </td>
+            <td>
+                {{ task.type }}
+            </td>
+            <td>
+                {{ task.repeats }}
+            </td>
+            <td>
+                {{ task.default }}
+            </td>
+            <td>
+                <div *ngIf="!task.default">
+                    <a [routerLink]="['edit',task._id]">Edit</a> |
+                    <a role="button" (click)="delete(task._id)">Delete</a>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>
-                    Task
-                </th>
-                <th>
-                    Type
-                </th>
-                <th>
-                    Repeats
-                </th>
-                <th>
-                    Actions
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let task of tasks">
-                <td>
-                    {{ task.name }}
-                </td>
-                <td>
-                    {{ task.type }}
-                </td>
-                <td>
-                    {{ task.repeats }}
-                </td>
-                <td>
-                    <a [routerLink]="['edit',task._id]">Edit</a> | <a role="button" (click)="delete(task._id)">Delete</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+<ng-template #loader>
+    <app-loader></app-loader>
+</ng-template>

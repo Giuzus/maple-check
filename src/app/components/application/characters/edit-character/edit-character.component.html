@@ -1,0 +1,5 @@
+<app-character-form *ngIf="character; else loader" [character]="character" ></app-character-form>
+
+<ng-template #loader>
+    <app-loader></app-loader>
+</ng-template>

@@ -25,8 +25,6 @@ export class TaskFormComponent implements OnInit {
   }
 
   async save() {
-    this.task.order = 0;
-
     if (this.task._id) {
       await this.taskService.update(this.task);
     }

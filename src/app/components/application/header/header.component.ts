@@ -16,21 +16,6 @@ export class HeaderComponent implements OnInit {
   public ServerTime: string;
 
   ngOnInit(): void {
-
-    this.startServerTimer();
     this.Username = this.authService.authenticatedUser.name;
-
-  }
-
-  startServerTimer() {
-    this.SetHeaderTime(); //so it doesnt wait one second before showing in the first place
-    
-    setInterval(() => {
-      this.SetHeaderTime();
-    }, 1000);
-  }
-
-  private SetHeaderTime() {
-    this.ServerTime = new Date().toUTCString();
   }
 }

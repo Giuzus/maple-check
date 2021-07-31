@@ -1,0 +1,24 @@
+<form>
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" placeholder="Character name" [(ngModel)]="character.name" />
+
+    <br>
+
+    <label for="level">Level</label>
+    <input type="number" id="level" name="level" placeholder="Level" [(ngModel)]="character.level" />
+
+    <br>
+
+    <label for="class">Class</label>
+
+    <select [(ngModel)]="character.class._id" id="class" name="class">
+        <option *ngFor="let class of classes" [ngValue]="class._id">
+            {{class.name}}
+        </option>
+    </select>
+
+
+    <br>
+
+    <button routerLink="/characters">Cancel</button><button (click)="save()">Save</button>
+</form>

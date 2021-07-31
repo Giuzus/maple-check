@@ -13,18 +13,14 @@ export class TasksComponent implements OnInit {
   tasks: Task[];
 
   constructor(private taskService: TaskService) { }
-  
+
   ngOnInit(): void {
 
-    this.taskService.getAllTasks()
-      .then(tasks => {
-        this.tasks = tasks;
-      });
+    this.tasks = this.taskService.getTasks();
+    this.taskService.tasksChanged.subscribe(tasks => this.tasks = tasks);
   }
 
-  async delete(id: string){
+  async delete(id: string) {
     await this.taskService.delete(id);
-    
-    this.tasks = this.tasks.filter((item) => item._id != id);
   }
 }

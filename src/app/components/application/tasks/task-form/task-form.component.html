@@ -13,8 +13,8 @@
 
     <label for="type">Repeats</label>
     <select [(ngModel)]="task.repeats" name="repeats">
-        <option *ngFor="let repeats of taskRepeatsEnum | enumToArray" value="{{repeats.value}}"
-            [selected]="repeats.value == task.repeats"> {{repeats.name}} </option>
+        <option *ngFor="let repeats of taskRepeatsEnum | enumToArray" [ngValue]="repeats.value"> {{repeats.name}}
+        </option>
     </select>
 
     <br>
@@ -23,8 +23,8 @@
         <label for="crystalValue">Crystal value</label>
         <input type="number" id="crystalValue" name="crystalValue" placeholder="Crystal value"
             [(ngModel)]="task.crystalValue" />
-            <br>
-    </div>    
+        <br>
+    </div>
 
     <label for="image">Image</label>
     <input type="text" id="image" name="image" placeholder="Image path" [(ngModel)]="task.image" />

@@ -4,7 +4,6 @@ export class Task {
     public repeats: string;
     public name: string;
     public image: string;
-    public completed: boolean;
     public crystalValue: number;
-    public order: number;
+    public default: boolean;
 }
