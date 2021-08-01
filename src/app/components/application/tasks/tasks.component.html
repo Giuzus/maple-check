@@ -1,51 +1,36 @@
-<h2>Tasks</h2>
+<div class="container">
 
-<button routerLink="new">New task</button>
+    <div class="d-flex mb-3">
+        <h2>Tasks</h2>
+        <button class="btn btn-primary ml-auto" routerLink="new">New task</button>
+    </div>
 
-<table *ngIf="tasks; else loader" class="table table-striped">
-    <thead>
-        <tr>
-            <th>
-                Task
-            </th>
-            <th>
-                Type
-            </th>
-            <th>
-                Repeats
-            </th>
-            <th>
-                Default
-            </th>
-            <th>
-                Actions
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let task of tasks">
-            <td>
-                {{ task.name }}
-            </td>
-            <td>
-                {{ task.type }}
-            </td>
-            <td>
-                {{ task.repeats }}
-            </td>
-            <td>
-                {{ task.default }}
-            </td>
-            <td>
-                <div *ngIf="!task.default">
-                    <a [routerLink]="['edit',task._id]">Edit</a> |
-                    <a role="button" (click)="delete(task._id)">Delete</a>
-                </div>
-            </td>
-        </tr>
-    </tbody>
-</table>
+    <table *ngIf="tasks; else loader" class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Task
+                </th>
+                <th>
+                    Type
+                </th>
+                <th>
+                    Repeats
+                </th>
+                <th>
+                    Default
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr app-task-list-item [task]="task" *ngFor="let task of tasks"></tr>
+        </tbody>
+    </table>
 
-<ng-template #loader>
-    <app-loader></app-loader>
-</ng-template>
+    <ng-template #loader>
+        <app-loader [size]="'150px'"></app-loader>
+    </ng-template>
+</div>

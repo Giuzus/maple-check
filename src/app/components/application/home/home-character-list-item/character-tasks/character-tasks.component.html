@@ -1,0 +1,20 @@
+<div *ngIf="tasks && completedTasks; else loader">
+    <b>Daily quests</b>
+    <app-character-task-list [completedTasks]="completedTasks" [character]="character"
+        [tasks]="tasks | filter:{type: 'QUEST', repeats: 'DAILY'}"></app-character-task-list>
+    <hr>
+    <b>Daily bosses</b>
+    <app-character-task-list [completedTasks]="completedTasks" [character]="character"
+        [tasks]="tasks | filter:{type: 'BOSS', repeats: 'DAILY'}"></app-character-task-list>
+    <hr>
+    <b>Weekly quests</b>
+    <app-character-task-list [completedTasks]="completedTasks" [character]="character"
+        [tasks]="tasks | filter:{type: 'QUEST', repeats: 'WEEKLY'}"></app-character-task-list>
+    <hr>
+    <b>Weekly bosses</b>
+    <app-character-task-list [completedTasks]="completedTasks" [character]="character"
+        [tasks]="tasks | filter:{type: 'BOSS', repeats: 'WEEKLY'}"></app-character-task-list>
+</div>
+<ng-template #loader>
+    <app-loader [size]="'150px'"></app-loader>
+</ng-template>

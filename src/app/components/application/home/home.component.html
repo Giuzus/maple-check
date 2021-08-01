@@ -1,1 +1,8 @@
-<h1>home</h1>
+<div class="container">
+    <h2>Home</h2>
+    <hr>
+    <app-home-character-list-item *ngFor="let character of characters" [character]="character" [tasks]="tasks"
+        [completedTasks]="completedTasks"></app-home-character-list-item>
+
+    
+</div>

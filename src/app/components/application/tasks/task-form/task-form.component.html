@@ -1,33 +1,43 @@
-<form>
+<div class="container">
+    <form #taskForm="ngForm" (ngSubmit)="save()">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input class="form-control" type="text" id="name" name="name" placeholder="Task name"
+                [(ngModel)]="task.name" required />
+        </div>
 
-    <label for="name">Name</label>
-    <input type="text" id="name" name="name" placeholder="Task name" [(ngModel)]="task.name" />
-    <br>
-    <label for="type">Type</label>
-    <select [(ngModel)]="task.type" name="type">
-        <option *ngFor="let type of taskTypeEnum | enumToArray" value="{{type.value}}"
-            [selected]="type.value == task.type"> {{type.name}} </option>
-    </select>
+        <div class="form-group">
+            <label for="type">Type</label>
+            <select class="form-control" [(ngModel)]="task.type" name="type" required>
+                <option *ngFor="let type of taskTypeEnum | enumToArray" value="{{type.value}}"
+                    [selected]="type.value == task.type"> {{type.name}} </option>
+            </select>
+        </div>
 
-    <br>
+        <div class="form-group" *ngIf="task.type == taskTypeEnum.Boss">
+            <label for="crystalValue">Crystal value</label>
+            <input class="form-control" type="number" id="crystalValue" name="crystalValue" placeholder="Crystal value"
+                [(ngModel)]="task.crystalValue" [required]="task.type == taskTypeEnum.Boss" />
+        </div>
 
-    <label for="type">Repeats</label>
-    <select [(ngModel)]="task.repeats" name="repeats">
-        <option *ngFor="let repeats of taskRepeatsEnum | enumToArray" [ngValue]="repeats.value"> {{repeats.name}}
-        </option>
-    </select>
+        <div class="form-group">
+            <label for="type">Repeats</label>
+            <select class="form-control" [(ngModel)]="task.repeats" name="repeats">
+                <option *ngFor="let repeats of taskRepeatsEnum | enumToArray" [ngValue]="repeats.value">
+                    {{repeats.name}}
+                </option>
+            </select>
+        </div>
 
-    <br>
-
-    <div *ngIf="task.type == taskTypeEnum.Boss">
-        <label for="crystalValue">Crystal value</label>
-        <input type="number" id="crystalValue" name="crystalValue" placeholder="Crystal value"
-            [(ngModel)]="task.crystalValue" />
-        <br>
-    </div>
-
-    <label for="image">Image</label>
-    <input type="text" id="image" name="image" placeholder="Image path" [(ngModel)]="task.image" />
-    <br>
-    <button routerLink="/tasks">Cancel</button><button (click)="save()">Save</button>
-</form>
+        <div class="form-group">
+            <label for="image">Image</label>
+            <input class="form-control" type="text" id="image" name="image" placeholder="Image path"
+                [(ngModel)]="task.image" required />
+        </div>
+        
+        <div class="float-right">
+            <button type="button" class="btn btn-secondary" routerLink="/tasks">Cancel</button>
+            <button type="submit" class="btn btn-success ml-2" [disabled]="taskForm.form.invalid"> Save </button>
+        </div>
+    </form>
+</div>

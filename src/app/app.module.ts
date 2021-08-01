@@ -30,7 +30,14 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { CharacterFormComponent } from './components/application/characters/character-form/character-form.component';
 import { NewCharacterComponent } from './components/application/characters/new-character/new-character.component';
 import { EditCharacterComponent } from './components/application/characters/edit-character/edit-character.component';
-
+import { CharacterTasksComponent } from './components/application/home/home-character-list-item/character-tasks/character-tasks.component';
+import { FilterPipe } from './pipes/filter/filter.pipe';
+import { CharacterTaskListComponent } from './components/application/home/home-character-list-item/character-tasks/character-task-list/character-task-list.component';
+import { CharacterListItemComponent } from './components/application/characters/character-list-item/character-list-item.component';
+import { TaskListItemComponent } from './components/application/tasks/task-list-item/task-list-item.component';
+import { CharacterTaskListItemComponent } from './components/application/home/home-character-list-item/character-tasks/character-task-list/character-task-list-item/character-task-list-item.component';
+import { HomeCharacterListItemComponent } from './components/application/home/home-character-list-item/home-character-list-item.component';
+import { NgxBootstrapIconsModule, allIcons } from 'ngx-bootstrap-icons';
 
 @NgModule({
   declarations: [
@@ -50,13 +57,21 @@ import { EditCharacterComponent } from './components/application/characters/edit
     LoaderComponent,
     CharacterFormComponent,
     NewCharacterComponent,
-    EditCharacterComponent
+    EditCharacterComponent,
+    CharacterTasksComponent,
+    FilterPipe,
+    CharacterTaskListComponent,
+    CharacterTaskListItemComponent,
+    CharacterListItemComponent,
+    HomeCharacterListItemComponent,
+    TaskListItemComponent
   ],
   imports: [
     BrowserModule,
     NgbModule,
     AppRoutingModule,
-    FormsModule 
+    FormsModule,
+    NgxBootstrapIconsModule.pick(allIcons)
   ],
   providers: [
     {

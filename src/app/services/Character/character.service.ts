@@ -44,6 +44,11 @@ export class CharacterService {
     private async fetchClasses(): Promise<void> {
         let response = await this.fetchService.get("characters/classes");
         this.classes = await response.json();
+        this.classes.sort((a, b) => {
+            if (a.name < b.name) { return -1; }
+            if (a.name > b.name) { return 1; }
+            return 0;
+        });
         this.emitClassesChanged();
     }
 
@@ -75,6 +80,14 @@ export class CharacterService {
             this.characters.push(updatedCharacter)
             this.emitCharactersChanged();
             return updatedCharacter;
+        }
+    }
+
+    async delete(id: string) {
+        let response = await this.fetchService.delete("characters", { id: id });
+        if (response.ok) {
+            this.characters = this.characters.filter(c => c._id != id);
+            this.emitCharactersChanged();
         }
     }
 }

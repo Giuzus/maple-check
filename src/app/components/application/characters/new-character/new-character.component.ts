@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Character } from 'src/app/models/Character';
+import { Class } from 'src/app/models/Class';
 
 @Component({
   selector: 'app-new-character',
@@ -12,6 +13,7 @@ export class NewCharacterComponent implements OnInit {
   
   constructor() { 
     this.character = new Character();
+    this.character.class = new Class();
   }
 
   ngOnInit(): void {

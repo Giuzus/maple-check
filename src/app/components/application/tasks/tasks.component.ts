@@ -20,7 +20,5 @@ export class TasksComponent implements OnInit {
     this.taskService.tasksChanged.subscribe(tasks => this.tasks = tasks);
   }
 
-  async delete(id: string) {
-    await this.taskService.delete(id);
-  }
+  
 }
