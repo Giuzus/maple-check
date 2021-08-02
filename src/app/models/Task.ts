@@ -5,5 +5,7 @@ export class Task {
     public name: string;
     public image: string;
     public crystalValue: number;
-    public default: boolean;
+    public default: boolean;    
+
+    public hidden: boolean;
 }

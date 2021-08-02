@@ -1,8 +1,16 @@
-<div class="overlay" (click)="changeTaskState(character._id,task._id, !isCompleted(task._id))"></div>
+<div *ngIf="!editMode" class="overlay" (click)="changeTaskState(character._id,task._id, !isCompleted(task._id))"></div>
 
 <td class="task-image-td"><img class="task-image" src="{{task.image}}" /> </td>
 <td> {{ task.name }} </td>
-<td class="checkbox-td">
-    <input *ngIf="!saving" type="checkbox" class="form-check-input" [checked]="isCompleted(task._id)">
+
+<td *ngIf="!editMode" class="checkbox-td">
+    <input *ngIf="!saving" type="checkbox" class="" [checked]="isCompleted(task._id)" />
     <app-loader *ngIf="saving" [size]="'25px'"></app-loader>
+</td>
+
+<td *ngIf="editMode">
+    <a (click)="toggleHiddenState()">
+        <label *ngIf="!task.hidden">Hide</label>
+        <label *ngIf="task.hidden">Show</label>
+    </a>
 </td>

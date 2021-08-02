@@ -1,8 +1,14 @@
 <div class="container">
     <h2>Home</h2>
     <hr>
-    <app-home-character-list-item *ngFor="let character of characters" [character]="character" [tasks]="tasks"
-        [completedTasks]="completedTasks"></app-home-character-list-item>
 
-    
+    <div *ngIf="characters; else loader">
+        <app-home-character-list-item *ngFor="let character of characters" [character]="character">
+        </app-home-character-list-item>
+    </div>
+
+    <ng-template #loader>
+        <app-loader [size]="'150px'"></app-loader>
+    </ng-template>
+
 </div>

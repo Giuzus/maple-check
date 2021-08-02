@@ -2,6 +2,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { CompletedTask } from 'src/app/models/CoompletedTask';
 import { Task } from 'src/app/models/Task';
 import { FetchService } from '../Fetch/fetch.service';
+import * as _ from 'lodash';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +10,10 @@ import { FetchService } from '../Fetch/fetch.service';
 export class TaskService {
 
   private tasks: Task[];
-  public tasksChanged = new EventEmitter<Task[]>();
+  public tasksChanged = new EventEmitter<void>();
 
   private completedTasks: CompletedTask[];
-  public completedTasksChanged = new EventEmitter<CompletedTask[]>();
+  public completedTasksChanged = new EventEmitter<void>();
 
   constructor(private fetchService: FetchService) {
     this.fetchTasks();
@@ -20,7 +21,7 @@ export class TaskService {
   }
 
   public getTasks(): Task[] {
-    return this.tasks?.slice();
+    return _.cloneDeep(this.tasks);
   }
 
   public async fetchTasks(): Promise<void> {
@@ -30,7 +31,7 @@ export class TaskService {
   }
 
   private emitTasksChanged() {
-    this.tasksChanged.emit(this.getTasks());
+    this.tasksChanged.emit();
   }
 
   public getCompletedTasks(): CompletedTask[] {
@@ -44,7 +45,7 @@ export class TaskService {
   }
 
   private emitCompletedTasksChanged() {
-    this.completedTasksChanged.emit(this.getCompletedTasks());
+    this.completedTasksChanged.emit();
   }
 
   public async changeTaskState(characterId: string, taskId: string, completed: boolean): Promise<void> {

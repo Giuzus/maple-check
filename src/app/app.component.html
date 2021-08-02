@@ -1,3 +1,5 @@
 <app-toast aria-live="polite" aria-atomic="true"></app-toast>
 <app-modal></app-modal>
 <router-outlet></router-outlet>
+
+<app-loader *ngIf="!authenticatedUser" [size]="'150px'"></app-loader>

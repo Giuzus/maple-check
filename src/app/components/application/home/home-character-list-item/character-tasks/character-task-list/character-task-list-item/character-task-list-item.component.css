@@ -6,7 +6,7 @@
 }
 
 .checkbox-td {
-    width: 20px;
+    width: 50px;
 }
 
 .task-image-td {
@@ -18,5 +18,4 @@
 .task-image {
     height: 50px;
     width: 50px;
-    object-fit: cover;
 }

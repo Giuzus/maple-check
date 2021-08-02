@@ -10,14 +10,11 @@ import { Task } from 'src/app/models/Task';
 })
 export class CharacterTasksComponent implements OnInit {
 
-  @Input() tasks: Task[];
-  @Input() completedTasks: CompletedTask[];
   @Input() character: Character;
   
   constructor() { }
 
   ngOnInit(): void {
   }
-
 
 }

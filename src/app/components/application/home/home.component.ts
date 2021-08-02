@@ -22,12 +22,12 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.characters = this.characterSerivice.getCharacters();
-    this.characterSerivice.charactersChanged.subscribe(c => this.characters = c);
+    this.characterSerivice.charactersChanged.subscribe(() => this.characters = this.characterSerivice.getCharacters());
 
     this.tasks = this.taskService.getTasks();
-    this.taskService.tasksChanged.subscribe(t => this.tasks = t);
+    this.taskService.tasksChanged.subscribe(() => this.tasks = this.taskService.getTasks());
 
     this.completedTasks = this.taskService.getCompletedTasks();
-    this.taskService.completedTasksChanged.subscribe(t => this.completedTasks = t);
+    this.taskService.completedTasksChanged.subscribe(() => this.completedTasks = this.taskService.getCompletedTasks());
   }
 }

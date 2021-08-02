@@ -1,6 +1,22 @@
-<table class="table table-striped">
-    <tbody>
-        <tr class="task-row" app-character-task-list-item *ngFor="let task of tasks" [task]="task" [completedTasks]="completedTasks"
-            [character]="character"></tr>
-    </tbody>
-</table>
+<div class="card mt-4">
+    <div class="card-body p-2">
+        <label><b>{{ label }}</b></label>
+        <a (click)="toggleEditMode()">Edit</a>
+
+        <div *ngIf="tasks && completedTasks; else loader">
+            <div>
+                <table class="table table-striped">
+                    <tbody>
+                        <ng-container *ngFor="let task of tasks">
+                            <tr app-character-task-list-item *ngIf="!task.hidden || editMode" class="task-row"  [task]="task"
+                                [completedTasks]="completedTasks" [character]="character" [editMode]="editMode"></tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <ng-template #loader>
+            <app-loader [size]="'150px'"></app-loader>
+        </ng-template>
+    </div>
+</div>

@@ -3,6 +3,7 @@ import { EventEmitter } from '@angular/core';
 import { Character } from 'src/app/models/Character';
 import { Class } from 'src/app/models/Class';
 import { FetchService } from '../Fetch/fetch.service';
+import * as _ from 'lodash';
 
 @Injectable({
     providedIn: 'root'
@@ -12,8 +13,8 @@ export class CharacterService {
     private characters: Character[];
     private classes: Class[];
 
-    public charactersChanged = new EventEmitter<Character[]>();
-    public classesChanged = new EventEmitter<Class[]>();
+    public charactersChanged = new EventEmitter<void>();
+    public classesChanged = new EventEmitter<void>();
 
     constructor(private fetchService: FetchService) {
         this.fetchCharacters();
@@ -21,7 +22,7 @@ export class CharacterService {
     }
 
     public getCharacters(): Character[] {
-        return this.characters?.slice();
+        return _.cloneDeep(this.characters);
     }
 
     public async getCharacter(id: any): Promise<Character> {
@@ -31,12 +32,22 @@ export class CharacterService {
     }
 
     public getClasses(): Class[] {
-        return this.classes?.slice();
+        return _.cloneDeep(this.classes);
     }
 
     private async fetchCharacters(): Promise<void> {
         let response = await this.fetchService.get("characters");
         this.characters = await response.json();
+
+        this.characters = this.characters.map(char => {
+            if (!char.configuration) {
+                char.configuration = {
+                    hidden: false,
+                    tasks: []
+                }
+            }
+            return char;
+        })
 
         this.emitCharactersChanged();
     }
@@ -44,20 +55,15 @@ export class CharacterService {
     private async fetchClasses(): Promise<void> {
         let response = await this.fetchService.get("characters/classes");
         this.classes = await response.json();
-        this.classes.sort((a, b) => {
-            if (a.name < b.name) { return -1; }
-            if (a.name > b.name) { return 1; }
-            return 0;
-        });
         this.emitClassesChanged();
     }
 
     private emitCharactersChanged() {
-        this.charactersChanged.emit(this.getCharacters());
+        this.charactersChanged.emit();
     }
 
     private emitClassesChanged() {
-        this.classesChanged.emit(this.getClasses());
+        this.classesChanged.emit();
     }
 
     async create(character: Character) {

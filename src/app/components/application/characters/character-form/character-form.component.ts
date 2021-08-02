@@ -19,9 +19,7 @@ export class CharacterFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.classes = this.characterService.getClasses();
-    this.characterService.classesChanged.subscribe(classes => {
-      this.classes = classes;
-    });
+    this.characterService.classesChanged.subscribe(() => this.classes = this.characterService.getClasses());
   }
 
   async save() {

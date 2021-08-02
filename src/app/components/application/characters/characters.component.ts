@@ -16,7 +16,7 @@ export class CharactersComponent implements OnInit {
   ngOnInit(): void {
 
     this.characters = this.characterService.getCharacters();
-    this.characterService.charactersChanged.subscribe(characters => this.characters = characters);
+    this.characterService.charactersChanged.subscribe(() => this.characters = this.characterService.getCharacters());
   }
 
   

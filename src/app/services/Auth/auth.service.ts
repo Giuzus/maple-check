@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/User';
 
@@ -12,6 +12,7 @@ export class AuthService {
 
 
   public authenticatedUser: User;
+  public authenticatedUserChanged = new EventEmitter<User>();
 
   constructor(private router: Router, private fetchService: FetchService) {
 
@@ -23,8 +24,10 @@ export class AuthService {
 
     let isOk = response.status == 200;
 
-    if (isOk)
+    if (isOk) {
       this.authenticatedUser = await response.json();
+      this.authenticatedUserChanged.emit(this.authenticatedUser);
+    }
 
     return isOk
   }
@@ -49,11 +52,11 @@ export class AuthService {
     let url = await response.text();
 
     return url;
-    
+
   }
 
   async signIn() {
-    let url =  await this.fetchLoginUrl();
+    let url = await this.fetchLoginUrl();
     location.href = url;
   }
 }

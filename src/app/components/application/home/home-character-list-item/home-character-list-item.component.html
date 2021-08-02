@@ -8,8 +8,7 @@
             </button>
         </div>
         <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
-            <app-character-tasks [tasks]="tasks" [character]="character"
-                [completedTasks]="completedTasks | filter:{character: character._id}">
+            <app-character-tasks [character]="character">
             </app-character-tasks>
         </div>
     </div>
