@@ -17,7 +17,7 @@ export class CharacterTaskListItemComponent implements OnInit {
   @Input() character: Character;
   @Input() editMode: Boolean;
 
-  @Output() changePriority = new EventEmitter<{ taskId: String, direction: number }>();
+  @Output() priorityChanged = new EventEmitter<{ taskId: String, direction: number }>();
 
   saving: boolean;
 
@@ -40,5 +40,9 @@ export class CharacterTaskListItemComponent implements OnInit {
 
   toggleHiddenState() {
     this.task.hidden = !this.task.hidden;
+  }
+
+  changePriority(direction: number) {
+    this.priorityChanged.emit({ taskId: this.task._id, direction: direction });
   }
 }

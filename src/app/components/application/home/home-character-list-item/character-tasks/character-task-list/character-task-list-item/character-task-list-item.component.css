@@ -12,10 +12,10 @@
 .task-image-td {
     width: 50px;
     padding: 0px;
-    ;
 }
 
 .task-image {
     height: 50px;
     width: 50px;
+    object-fit: cover;
 }

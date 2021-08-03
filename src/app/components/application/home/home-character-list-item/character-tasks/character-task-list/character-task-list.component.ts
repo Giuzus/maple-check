@@ -4,6 +4,8 @@ import { CompletedTask } from 'src/app/models/CoompletedTask';
 import { Task } from 'src/app/models/Task';
 import { TaskService } from 'src/app/services/Task/task.service';
 import * as _ from 'lodash';
+import * as arrayMove from 'array-move';
+import { CharacterService } from 'src/app/services/Character/character.service';
 
 @Component({
   selector: 'app-character-task-list',
@@ -23,7 +25,9 @@ export class CharacterTaskListComponent implements OnInit {
 
   editMode: Boolean;
 
-  constructor(private taskService: TaskService) { }
+  isCollapsed: boolean = false;
+
+  constructor(private taskService: TaskService, private characterService: CharacterService) { }
 
   ngOnInit(): void {
     this.tasks = this.filterTasks(this.taskService.getTasks());
@@ -35,7 +39,20 @@ export class CharacterTaskListComponent implements OnInit {
 
   filterTasks(tasks: Task[]): Task[] {
     if (tasks) {
-      return tasks.filter(task => task.type == this.type && task.repeats == this.repeats);
+      //Filter tasks 
+      tasks = tasks.filter(task => task.type == this.type && task.repeats == this.repeats);
+
+      //Load configurations
+      tasks = tasks.map(task => {
+        task.hidden = this.character.configuration.tasks.some(t => t.task == task._id && t.hidden);
+        task.priority = this.character.configuration.tasks.findIndex(t => t.task == task._id);
+        return task;
+      });
+
+      //Order by priority
+      tasks = _.orderBy(tasks, ['priority'], ['asc']);
+
+      return tasks;
     }
   }
 
@@ -46,6 +63,38 @@ export class CharacterTaskListComponent implements OnInit {
   }
 
   toggleEditMode() {
+
+    if (this.editMode) {
+      this.character.configuration.tasks = this.tasks.map((task, index) => {
+        return {
+          task: task._id,
+          hidden: task.hidden,
+          priority: index
+        }
+      });
+
+      this.characterService.update(this.character);
+    }
+
     this.editMode = !this.editMode;
   }
+
+  priorityChanged(args: { taskId: String, direction: number }) {
+
+    console.log("bruh");
+    console.log(args);
+    let taskIndex = this.tasks.findIndex(t => t._id == args.taskId);
+
+    let nextIndex = taskIndex + args.direction;
+
+    if (nextIndex < 0 || nextIndex > this.tasks.length)
+      return;
+
+    console.log("before");
+    console.log(this.tasks);
+    this.tasks = arrayMove(this.tasks, taskIndex, nextIndex);
+    console.log("after");
+    console.log(this.tasks);
+  }
+
 }

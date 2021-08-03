@@ -1,15 +1,20 @@
 <div class="card mt-4">
     <div class="card-body p-2">
-        <label><b>{{ label }}</b></label>
-        <a (click)="toggleEditMode()">Edit</a>
+        <label role="button" class="m-0" (click)="collapse.toggle()">
+            <b class="mr-1">{{ label }}</b>
+            <i-bs *ngIf="isCollapsed" name="chevron-down"></i-bs>
+            <i-bs *ngIf="!isCollapsed" name="chevron-up"></i-bs>
+        </label>
+        <a role="button" class="float-right" *ngIf="!isCollapsed" (click)="toggleEditMode()">Edit</a>
 
-        <div *ngIf="tasks && completedTasks; else loader">
-            <div>
-                <table class="table table-striped">
+        <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+            <div *ngIf="tasks && completedTasks; else loader">
+                <table class="table table-hover mt-1">
                     <tbody>
                         <ng-container *ngFor="let task of tasks">
-                            <tr app-character-task-list-item *ngIf="!task.hidden || editMode" class="task-row"  [task]="task"
-                                [completedTasks]="completedTasks" [character]="character" [editMode]="editMode"></tr>
+                            <tr app-character-task-list-item *ngIf="!task.hidden || editMode" class="task-row"
+                                [task]="task" [completedTasks]="completedTasks" [character]="character"
+                                [editMode]="editMode" (priorityChanged)="priorityChanged($event)"></tr>
                         </ng-container>
                     </tbody>
                 </table>

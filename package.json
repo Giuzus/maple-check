@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "~12.1.2",
     "@angular/router": "~12.1.2",
     "@ng-bootstrap/ng-bootstrap": "^8.0.0",
+    "array-move": "^3.0.1",
     "bootstrap": "^4.6.0",
     "lodash": "^4.17.21",
     "mongoose": "^5.13.3",

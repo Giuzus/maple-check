@@ -8,9 +8,17 @@
     <app-loader *ngIf="saving" [size]="'25px'"></app-loader>
 </td>
 
-<td *ngIf="editMode">
-    <a (click)="toggleHiddenState()">
-        <label *ngIf="!task.hidden">Hide</label>
-        <label *ngIf="task.hidden">Show</label>
+<td *ngIf="editMode" class="text-right p-1">
+    <a class="btn btn-light" role="button" (click)="changePriority(-1)">
+        <i-bs name="chevron-up"></i-bs>
+    </a>
+
+    <a class="btn btn-light" role="button" (click)="changePriority(1)">
+        <i-bs name="chevron-down"></i-bs>
+    </a>
+
+    <a class="btn btn-light" role="button" (click)="toggleHiddenState()">
+        <i-bs class="text-danger" *ngIf="task.hidden" name="eye-slash-fill"></i-bs>
+        <i-bs *ngIf="!task.hidden" name="eye-fill"></i-bs>
     </a>
 </td>

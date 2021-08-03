@@ -38,6 +38,7 @@ import { TaskListItemComponent } from './components/application/tasks/task-list-
 import { CharacterTaskListItemComponent } from './components/application/home/home-character-list-item/character-tasks/character-task-list/character-task-list-item/character-task-list-item.component';
 import { HomeCharacterListItemComponent } from './components/application/home/home-character-list-item/home-character-list-item.component';
 import { NgxBootstrapIconsModule, allIcons } from 'ngx-bootstrap-icons';
+import { SortPipe } from './pipes/sort/sort.pipe';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { NgxBootstrapIconsModule, allIcons } from 'ngx-bootstrap-icons';
     CharacterTaskListItemComponent,
     CharacterListItemComponent,
     HomeCharacterListItemComponent,
-    TaskListItemComponent
+    TaskListItemComponent,
+    SortPipe
   ],
   imports: [
     BrowserModule,

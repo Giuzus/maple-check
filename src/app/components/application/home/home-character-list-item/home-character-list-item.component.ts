@@ -12,7 +12,7 @@ export class HomeCharacterListItemComponent implements OnInit {
 
   @Input() character: Character;
   
-  isCollapsed: boolean;
+  isCollapsed: boolean = false;
 
   constructor() { }
 

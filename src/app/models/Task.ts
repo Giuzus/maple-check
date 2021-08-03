@@ -8,4 +8,5 @@ export class Task {
     public default: boolean;    
 
     public hidden: boolean;
+    public priority: number;
 }
