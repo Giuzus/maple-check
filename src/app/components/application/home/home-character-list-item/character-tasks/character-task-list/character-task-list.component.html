@@ -8,7 +8,7 @@
             </label>
             <div class="float-right">
                 
-                <a class="btn btn-light" role="button"  *ngIf="!isCollapsed" [disabled]="saving" (click)="toggleEditMode()">
+                <a class="btn btn-light" role="button"  *ngIf="!isCollapsed" (click)="toggleEditMode()">
                     <i-bs *ngIf="!editMode && !saving" name="pencil-square"></i-bs>
                     <i-bs *ngIf="editMode && !saving" class="text-success" name="check-circle-fill"></i-bs>
                     <app-loader [size]="'25px'" *ngIf="saving"></app-loader>

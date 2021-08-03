@@ -1,4 +1,5 @@
-import { ErrorHandler, Injectable, Injector } from '@angular/core';
+import { ErrorHandler, Injectable, Injector, NgZone } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthError } from 'src/app/models/AuthError';
 import { AuthService } from '../Auth/auth.service';
 import { ModalService } from '../Modal/modal.service';
@@ -8,27 +9,17 @@ import { ModalService } from '../Modal/modal.service';
 })
 export class ErrorHandlerService implements ErrorHandler {
 
-  private modalService: ModalService;
-  private authService: AuthService;
 
-  constructor(private injector: Injector) {
-    setTimeout(() => {
-      this.modalService = injector.get(ModalService);
-      this.authService = injector.get(AuthService);
-    });
 
-  }
+  constructor(private injector: Injector) { }
 
   handleError(error): void {
 
-    if (error.rejection instanceof AuthError) {
-      this.modalService.show("Authentication error", "Refreshing token");
+    const modalService = this.injector.get(ModalService);
+    const zone = this.injector.get(NgZone);
 
-      this.authService.signIn();
-      return;
-    }
+    zone.run(() => modalService.show("ERROR", error.message));
 
-    this.modalService.show("ERROR", error.message)
     console.error(error);
 
   }
