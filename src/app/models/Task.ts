@@ -1,12 +1,12 @@
 export class Task {
-    public _id: string;
-    public type: string;
-    public repeats: string;
-    public name: string;
-    public image: string;
-    public crystalValue: number;
-    public default: boolean;    
+    public _id: String;
+    public type: String;
+    public repeats: String;
+    public name: String;
+    public image: String;
+    public crystalValue: Number;
+    public default: Boolean;    
 
-    public hidden: boolean;
-    public priority: number;
+    public hidden: Boolean;
+    public priority: Number;
 }

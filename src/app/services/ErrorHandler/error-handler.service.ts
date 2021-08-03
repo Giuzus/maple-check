@@ -16,9 +16,16 @@ export class ErrorHandlerService implements ErrorHandler {
   handleError(error): void {
 
     const modalService = this.injector.get(ModalService);
+    const authService = this.injector.get(AuthService);
     const zone = this.injector.get(NgZone);
 
-    zone.run(() => modalService.show("ERROR", error.message));
+    zone.run(() => {
+      if (error.rejection instanceof AuthError) {
+        authService.signIn();
+        return;
+      }
+      modalService.show("ERROR", error.message);
+    });
 
     console.error(error);
 

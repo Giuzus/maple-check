@@ -69,13 +69,23 @@ export class CharacterTaskListComponent implements OnInit {
       return;
 
     if (this.editMode) {
-      this.character.configuration.tasks = this.tasks.map((task, index) => {
+
+      let taskIds = this.tasks.map(t => t._id);
+
+      console.log(this.character.configuration.tasks);
+
+      //remove old task configuration
+      this.character.configuration.tasks = this.character.configuration.tasks.filter(config => !taskIds.includes(config.task));
+      
+      //Add new configuration
+      this.character.configuration.tasks = this.character.configuration.tasks.concat(this.tasks.map((task, index) => {
         return {
           task: task._id,
           hidden: task.hidden,
           priority: index
         }
-      });
+      }));
+      
       this.saving = true;
 
       this.characterService.update(this.character, false)
