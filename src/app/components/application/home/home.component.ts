@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Character } from 'src/app/models/Character';
 import { CompletedTask } from 'src/app/models/CoompletedTask';
 import { Task } from 'src/app/models/Task';
@@ -14,11 +14,12 @@ import { ToastService } from 'src/app/services/Toast/toast.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private characterSerivice: CharacterService, private taskService: TaskService) { }
 
   characters: Character[];
   tasks: Task[];
   completedTasks: CompletedTask[];
+
+  constructor(private characterSerivice: CharacterService, private taskService: TaskService) { }
 
   ngOnInit(): void {
     this.characters = this.characterSerivice.getCharacters();

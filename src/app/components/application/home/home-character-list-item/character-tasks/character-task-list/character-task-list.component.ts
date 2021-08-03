@@ -24,6 +24,7 @@ export class CharacterTaskListComponent implements OnInit {
   completedTasks: CompletedTask[];
 
   editMode: Boolean;
+  saving: Boolean;
 
   isCollapsed: boolean = false;
 
@@ -62,7 +63,10 @@ export class CharacterTaskListComponent implements OnInit {
     }
   }
 
-  toggleEditMode() {
+  async toggleEditMode() {
+
+    if (this.saving)
+      return;
 
     if (this.editMode) {
       this.character.configuration.tasks = this.tasks.map((task, index) => {
@@ -72,8 +76,12 @@ export class CharacterTaskListComponent implements OnInit {
           priority: index
         }
       });
+      this.saving = true;
 
-      this.characterService.update(this.character);
+      this.characterService.update(this.character, false)
+        .then(() => {
+          this.saving = false;
+        });
     }
 
     this.editMode = !this.editMode;
@@ -81,8 +89,6 @@ export class CharacterTaskListComponent implements OnInit {
 
   priorityChanged(args: { taskId: String, direction: number }) {
 
-    console.log("bruh");
-    console.log(args);
     let taskIndex = this.tasks.findIndex(t => t._id == args.taskId);
 
     let nextIndex = taskIndex + args.direction;
@@ -90,11 +96,7 @@ export class CharacterTaskListComponent implements OnInit {
     if (nextIndex < 0 || nextIndex > this.tasks.length)
       return;
 
-    console.log("before");
-    console.log(this.tasks);
     this.tasks = arrayMove(this.tasks, taskIndex, nextIndex);
-    console.log("after");
-    console.log(this.tasks);
   }
 
 }

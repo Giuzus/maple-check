@@ -1,12 +1,20 @@
 <div class="card mt-4">
     <div class="card-body p-2">
-        <label role="button" class="m-0" (click)="collapse.toggle()">
-            <b class="mr-1">{{ label }}</b>
-            <i-bs *ngIf="isCollapsed" name="chevron-down"></i-bs>
-            <i-bs *ngIf="!isCollapsed" name="chevron-up"></i-bs>
-        </label>
-        <a role="button" class="float-right" *ngIf="!isCollapsed" (click)="toggleEditMode()">Edit</a>
-
+        <div>
+            <label role="button" class="m-2" (click)="collapse.toggle()">
+                <b class="mr-1">{{ label }}</b>
+                <i-bs *ngIf="isCollapsed" name="chevron-down"></i-bs>
+                <i-bs *ngIf="!isCollapsed" name="chevron-up"></i-bs>
+            </label>
+            <div class="float-right">
+                
+                <a class="btn btn-light" role="button"  *ngIf="!isCollapsed" [disabled]="saving" (click)="toggleEditMode()">
+                    <i-bs *ngIf="!editMode && !saving" name="pencil-square"></i-bs>
+                    <i-bs *ngIf="editMode && !saving" class="text-success" name="check-circle-fill"></i-bs>
+                    <app-loader [size]="'25px'" *ngIf="saving"></app-loader>
+                </a>
+            </div>
+        </div>
         <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
             <div *ngIf="tasks && completedTasks; else loader">
                 <table class="table table-hover mt-1">

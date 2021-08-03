@@ -77,14 +77,18 @@ export class CharacterService {
         }
     }
 
-    async update(character: Character) {
+    async update(character: Character, emitChanged: Boolean = true) {
         let response = await this.fetchService.put("characters", character);
 
         if (response.ok) {
             let updatedCharacter = await response.json();
-            this.characters = this.characters.filter((char) => char._id != updatedCharacter._id);
-            this.characters.push(updatedCharacter)
-            this.emitCharactersChanged();
+            let updatedCharIndex = this.characters.findIndex((char) => char._id == updatedCharacter._id);
+            this.characters[updatedCharIndex] = updatedCharacter;
+            
+            if (emitChanged) {
+                this.emitCharactersChanged();
+            }
+            
             return updatedCharacter;
         }
     }

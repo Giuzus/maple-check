@@ -1,7 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Character } from 'src/app/models/Character';
-import { CompletedTask } from 'src/app/models/CoompletedTask';
-import { Task } from 'src/app/models/Task';
 
 @Component({
   selector: 'app-home-character-list-item',
@@ -12,7 +10,7 @@ export class HomeCharacterListItemComponent implements OnInit {
 
   @Input() character: Character;
   
-  isCollapsed: boolean = false;
+  isCollapsed: boolean;
 
   constructor() { }
 
