@@ -10,7 +10,6 @@ import { FetchService } from '../Fetch/fetch.service';
 })
 export class AuthService {
 
-
   public authenticatedUser: User;
   public authenticatedUserChanged = new EventEmitter<User>();
 
@@ -59,4 +58,14 @@ export class AuthService {
     let url = await this.fetchLoginUrl();
     location.href = url;
   }
+
+  async logout() {
+    this.delete_cookie("auth");
+    location.href = "/";
+  }
+
+  delete_cookie = function (name) {
+    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  }
+
 }

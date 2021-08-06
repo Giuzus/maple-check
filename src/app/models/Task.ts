@@ -9,4 +9,5 @@ export class Task {
 
     public hidden: Boolean;
     public priority: Number;
+    public complete: Boolean;
 }

@@ -45,8 +45,8 @@ export class CharacterTaskListComponent implements OnInit {
 
       //Load configurations
       tasks = tasks.map(task => {
-        task.hidden = this.character.configuration.tasks.some(t => t.task == task._id && t.hidden);
-        task.priority = this.character.configuration.tasks.findIndex(t => t.task == task._id);
+        task.hidden = this.character?.configuration?.tasks.some(t => t.task == task._id && t.hidden);
+        task.priority = this.character?.configuration?.tasks.findIndex(t => t.task == task._id);
         return task;
       });
 
@@ -59,7 +59,14 @@ export class CharacterTaskListComponent implements OnInit {
 
   filterCompletedTasks(completedTasks: CompletedTask[]): CompletedTask[] {
     if (completedTasks) {
-      return completedTasks.filter(completedTask => completedTask.character == this.character._id);
+      let filteredCompletedTasks = completedTasks.filter(completedTask => completedTask.character == this.character._id);
+
+      this.tasks = this.tasks.map(task => {
+        task.complete = filteredCompletedTasks.some(completed => completed.task == task._id);
+        return task;
+      });
+
+      return filteredCompletedTasks;
     }
   }
 
@@ -72,11 +79,16 @@ export class CharacterTaskListComponent implements OnInit {
 
       let taskIds = this.tasks.map(t => t._id);
 
-      console.log(this.character.configuration.tasks);
-
       //remove old task configuration
+      if (!this.character.configuration) {
+        this.character.configuration = {
+          hidden: false,
+          tasks: []
+        }
+      }
+
       this.character.configuration.tasks = this.character.configuration.tasks.filter(config => !taskIds.includes(config.task));
-      
+
       //Add new configuration
       this.character.configuration.tasks = this.character.configuration.tasks.concat(this.tasks.map((task, index) => {
         return {
@@ -85,7 +97,7 @@ export class CharacterTaskListComponent implements OnInit {
           priority: index
         }
       }));
-      
+
       this.saving = true;
 
       this.characterService.update(this.character, false)

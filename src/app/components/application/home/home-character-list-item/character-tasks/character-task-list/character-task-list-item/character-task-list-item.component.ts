@@ -25,16 +25,14 @@ export class CharacterTaskListItemComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  isCompleted(id: string): boolean {
-    return this.completedTasks.some(completed => completed.task == id);
-  }
-
-  async changeTaskState(characterId, taskId, completed) {
+  async changeTaskState() {
     if (this.saving)
       return;
 
+    this.task.complete = !this.task.complete;
+
     this.saving = true;
-    await this.taskService.changeTaskState(characterId, taskId, completed);
+    await this.taskService.changeTaskState(this.character._id, this.task._id, this.task.complete);
     this.saving = false;
   }
 

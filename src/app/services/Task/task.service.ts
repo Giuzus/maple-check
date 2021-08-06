@@ -48,7 +48,7 @@ export class TaskService {
     this.completedTasksChanged.emit();
   }
 
-  public async changeTaskState(characterId: string, taskId: string, completed: boolean): Promise<void> {
+  public async changeTaskState(characterId: String, taskId: String, completed: Boolean): Promise<void> {
 
     let response = await this.fetchService.post('tasks/change-state',
       {

@@ -2,14 +2,20 @@
     <div class="row">
         <div class="col-2 sidebar pt-2">
             <nav>
-                <ul ngbNav #sidebar="ngbNav" class="nav flex-column nav-pills" >
-                    <li ngbNavItem *ngFor="let character of characters" class="nav-item" >
+                <ul ngbNav #sidebar="ngbNav" class="nav flex-column nav-pills">
+                    <li ngbNavItem *ngFor="let character of characters" class="nav-item">
                         <a ngbNavLink class="nav-link">{{ character.name }}</a>
 
                         <ng-template ngbNavContent>
                             <app-home-character-list-item [character]="character"> </app-home-character-list-item>
                         </ng-template>
 
+                    </li>
+
+                    <li *ngIf="characters?.length == 0" ngbNavItem class="nav-item">
+                        <a ngbNavLink routerLink="/characters/new" class="nav-link">
+                            <i-bs class="text-success" name="plus"></i-bs> Create character
+                        </a>
                     </li>
                 </ul>
             </nav>
@@ -18,11 +24,10 @@
         <div class="col bg-light">
             <div [ngbNavOutlet]="sidebar"></div>
 
-            <h3 *ngIf="characters?.length == 0"><a routerLink="/characters/new">Register some characters</a></h3>
+            <h3 *ngIf="characters?.length == 0" class="m-2"> No characters registered.</h3>
         </div>
     </div>
 </div>
-
 <ng-template #loader>
     <app-loader [size]="'150px'"></app-loader>
 </ng-template>

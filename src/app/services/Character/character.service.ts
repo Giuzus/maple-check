@@ -39,16 +39,6 @@ export class CharacterService {
         let response = await this.fetchService.get("characters");
         this.characters = await response.json();
 
-        this.characters = this.characters.map(char => {
-            if (!char.configuration) {
-                char.configuration = {
-                    hidden: false,
-                    tasks: []
-                }
-            }
-            return char;
-        })
-
         this.emitCharactersChanged();
     }
 

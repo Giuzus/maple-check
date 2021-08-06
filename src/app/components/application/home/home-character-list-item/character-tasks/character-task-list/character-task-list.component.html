@@ -7,8 +7,8 @@
                 <i-bs *ngIf="!isCollapsed" name="chevron-up"></i-bs>
             </label>
             <div class="float-right">
-                
-                <a class="btn btn-light" role="button"  *ngIf="!isCollapsed" (click)="toggleEditMode()">
+
+                <a class="btn btn-light" role="button" *ngIf="!isCollapsed" (click)="toggleEditMode()">
                     <i-bs *ngIf="!editMode && !saving" name="pencil-square"></i-bs>
                     <i-bs *ngIf="editMode && !saving" class="text-success" name="check-circle-fill"></i-bs>
                     <app-loader [size]="'25px'" *ngIf="saving"></app-loader>
@@ -16,9 +16,24 @@
             </div>
         </div>
         <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+            <hr>
             <div *ngIf="tasks && completedTasks; else loader">
                 <table class="table table-hover mt-1">
-                    <tbody>
+                    <tbody *ngIf="!editMode">
+                        <ng-container *ngFor="let task of tasks | filter:{ complete: false }">
+                            <tr app-character-task-list-item *ngIf="!task.hidden || editMode" class="task-row"
+                                [task]="task" [completedTasks]="completedTasks" [character]="character"
+                                [editMode]="editMode" (priorityChanged)="priorityChanged($event)"></tr>
+                        </ng-container>
+                    </tbody>
+                    <tbody *ngIf="!editMode" class="complete-table">
+                        <ng-container *ngFor="let task of tasks | filter:{ complete: true }">
+                            <tr app-character-task-list-item *ngIf="!task.hidden || editMode" class="task-row"
+                                [task]="task" [completedTasks]="completedTasks" [character]="character"
+                                [editMode]="editMode" (priorityChanged)="priorityChanged($event)"></tr>
+                        </ng-container>
+                    </tbody>
+                    <tbody *ngIf="editMode">
                         <ng-container *ngFor="let task of tasks">
                             <tr app-character-task-list-item *ngIf="!task.hidden || editMode" class="task-row"
                                 [task]="task" [completedTasks]="completedTasks" [character]="character"
