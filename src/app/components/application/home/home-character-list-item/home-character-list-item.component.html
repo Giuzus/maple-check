@@ -1,15 +1,4 @@
-<div class="card mt-4">
-    <div class="card-body p-2">
-        <div class="d-flex" role="button" (click)="collapse.toggle(); saveCollapseState()">
-            <h5 class="m-2"> {{character.name}} </h5>
-            <button type="button" class="ml-auto btn btn-light" [attr.aria-expanded]="!isCollapsed">
-                <i-bs *ngIf="isCollapsed" name="chevron-down"></i-bs>
-                <i-bs *ngIf="!isCollapsed" name="chevron-up"></i-bs>
-            </button>
-        </div>
-        <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
-            <app-character-tasks [character]="character">
-            </app-character-tasks>
-        </div>
-    </div>
-</div>
+<h1 class="m-2"> {{character.name}} </h1>
+
+<app-character-tasks [character]="character">
+</app-character-tasks>

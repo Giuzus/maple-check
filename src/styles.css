@@ -1,1 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
+.bottom-right-floating-button {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+}

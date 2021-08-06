@@ -1,8 +1,9 @@
 <div class="container">
 
+    <button class="btn btn-primary bottom-right-floating-button" routerLink="new">New task</button>
+
     <div class="d-flex mb-3">
-        <h2>Tasks</h2>
-        <button class="btn btn-primary ml-auto" routerLink="new">New task</button>
+        <h2>Tasks</h2>    
     </div>
 
     <table *ngIf="tasks; else loader" class="table table-striped">

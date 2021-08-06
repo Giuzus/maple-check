@@ -9,18 +9,9 @@ import { Character } from 'src/app/models/Character';
 export class HomeCharacterListItemComponent implements OnInit {
 
   @Input() character: Character;
-  
-  isCollapsed: boolean;
+
 
   constructor() { }
 
-  ngOnInit(): void {
-    let localStoredValue = localStorage.getItem(`CharacterCollapsed:${this.character._id}`);
-    this.isCollapsed = localStoredValue == undefined || localStoredValue == "true";
-
-  }
-
-  saveCollapseState() {
-    localStorage.setItem(`CharacterCollapsed:${this.character._id}`, this.isCollapsed.toString());
-  }
+  ngOnInit(): void { }
 }

@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Character } from 'src/app/models/Character';
 import { CompletedTask } from 'src/app/models/CoompletedTask';
 import { Task } from 'src/app/models/Task';
 import { CharacterService } from 'src/app/services/Character/character.service';
-import { ModalService } from 'src/app/services/Modal/modal.service';
 import { TaskService } from 'src/app/services/Task/task.service';
-import { ToastService } from 'src/app/services/Toast/toast.service';
+
 
 @Component({
   selector: 'app-home',
@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
   constructor(private characterSerivice: CharacterService, private taskService: TaskService) { }
 
   ngOnInit(): void {
+
     this.characters = this.characterSerivice.getCharacters();
     this.characterSerivice.charactersChanged.subscribe(() => this.characters = this.characterSerivice.getCharacters());
 
@@ -31,4 +32,5 @@ export class HomeComponent implements OnInit {
     this.completedTasks = this.taskService.getCompletedTasks();
     this.taskService.completedTasksChanged.subscribe(() => this.completedTasks = this.taskService.getCompletedTasks());
   }
+
 }

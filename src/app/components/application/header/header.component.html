@@ -1,14 +1,27 @@
-<ul ngbNav [activeId]="router.url" class="nav-tabs">
-    <li ngbNavItem [ngbNavItem]="'/home'">
-        <a ngbNavLink routerLink="home" >Home</a>
-    </li>
-    <li ngbNavItem [ngbNavItem]="'/characters'">
-        <a ngbNavLink routerLink="characters" >Characters</a>
-    </li>
-    <li ngbNavItem [ngbNavItem]="'/tasks'">
-        <a ngbNavLink routerLink="tasks" >Tasks</a>
-    </li>
-    <li ngbNavItem [disabled]="true" class="ml-auto">
-        <a ngbNavLink > {{Username}} </a>
-    </li> 
-</ul>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+    <div>
+        <ul ngbNav [activeId]="router.url" class="navbar-nav">
+            <li ngbNavItem [ngbNavItem]="'/home'" class="nav-item">
+                <a ngbNavLink routerLink="home" class="navbar-brand">Maple Check</a>
+            </li>
+            <li ngbNavItem [ngbNavItem]="'/characters'" class="nav-item">
+                <a ngbNavLink routerLink="characters" class="nav-link">Characters</a>
+            </li>
+            <li ngbNavItem [ngbNavItem]="'/tasks'" class="nav-item">
+                <a ngbNavLink routerLink="tasks" class="nav-link">Tasks</a>
+            </li>
+        </ul>
+    </div>
+    <div class="ml-auto">
+        <ul class="navbar-nav">
+            <li ngbDropdown class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" role="button" ngbDropdownToggle
+                    data-toggle="dropdown">{{Username}}</a>
+
+                <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right">
+                    <a ngbDropdownItem class="dropdown-item" >Logout</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
