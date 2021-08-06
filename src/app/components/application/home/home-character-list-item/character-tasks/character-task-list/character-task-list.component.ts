@@ -10,7 +10,7 @@ import { CharacterService } from 'src/app/services/Character/character.service';
 @Component({
   selector: 'app-character-task-list',
   templateUrl: './character-task-list.component.html',
-  styleUrls: ['./character-task-list.component.css']
+  styleUrls: ['./character-task-list.component.scss']
 })
 export class CharacterTaskListComponent implements OnInit {
 

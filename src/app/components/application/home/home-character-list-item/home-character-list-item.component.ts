@@ -4,7 +4,7 @@ import { Character } from 'src/app/models/Character';
 @Component({
   selector: 'app-home-character-list-item',
   templateUrl: './home-character-list-item.component.html',
-  styleUrls: ['./home-character-list-item.component.css']
+  styleUrls: ['./home-character-list-item.component.scss']
 })
 export class HomeCharacterListItemComponent implements OnInit {
 

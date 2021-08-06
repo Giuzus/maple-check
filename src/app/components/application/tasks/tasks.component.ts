@@ -6,7 +6,7 @@ import { TaskService } from 'src/app/services/Task/task.service';
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
-  styleUrls: ['./tasks.component.css']
+  styleUrls: ['./tasks.component.scss']
 })
 export class TasksComponent implements OnInit {
 

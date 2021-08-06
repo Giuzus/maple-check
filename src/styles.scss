@@ -1,0 +1,11 @@
+$theme-colors: (
+  "primary": #ff9e3f,
+);
+
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
+
+.bottom-right-floating-button {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+}
