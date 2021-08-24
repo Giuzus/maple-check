@@ -16,21 +16,21 @@ export class CharacterTaskListItemComponent implements OnInit {
   @Input() character: Character;
   @Input() editMode: Boolean;
 
+  @Output() onTaskStateChange = new EventEmitter<{ characterId: String, taskId: String, complete: Boolean }>();
+
   saving: boolean;
 
-  constructor(private taskService: TaskService) { }
+  constructor() { }
 
   ngOnInit(): void { }
 
   async changeTaskState() {
-    if (this.saving)
-      return;
 
-    this.task.complete = !this.task.complete;
-
-    this.saving = true;
-    await this.taskService.changeTaskState(this.character._id, this.task._id, this.task.complete);
-    this.saving = false;
+    this.onTaskStateChange.emit({
+      characterId: this.character._id,
+      taskId: this.task._id,
+      complete: !this.task.complete
+    });
   }
 
   toggleHiddenState() {

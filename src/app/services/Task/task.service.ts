@@ -66,8 +66,6 @@ export class TaskService {
         this.completedTasks.push(await response.json());
       }
     }
-
-    this.emitCompletedTasksChanged();
   }
 
   public async getTask(id: String): Promise<Task> {

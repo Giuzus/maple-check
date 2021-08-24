@@ -24,7 +24,6 @@ export class CharacterTaskListComponent implements OnInit {
   completedTasks: CompletedTask[];
 
   editMode: Boolean;
-  saving: Boolean;
 
   isCollapsed: boolean = false;
 
@@ -63,9 +62,7 @@ export class CharacterTaskListComponent implements OnInit {
   }
 
   updateTasksProperties() {
-    console.log(this.character);
     if (this.completedTasks && this.tasks) {
-      console.log("updateTasksProperties");
       this.tasks = this.tasks.map(task => {
         task.hidden = this.character?.configuration?.tasks.some(t => t.task == task._id && t.hidden);
         task.priority = this.character?.configuration?.tasks.findIndex(t => t.task == task._id);
@@ -81,21 +78,18 @@ export class CharacterTaskListComponent implements OnInit {
 
   async toggleEditMode() {
 
-    if (this.saving)
-      return;
-
     if (this.editMode) {
 
       let taskIds = this.tasks.map(t => t._id);
 
-      
+
       if (!this.character.configuration) {
         this.character.configuration = {
           hidden: false,
           tasks: []
         }
       }
-      
+
       //remove old task configuration
       this.character.configuration.tasks = this.character.configuration.tasks.filter(config => !taskIds.includes(config.task));
 
@@ -108,12 +102,8 @@ export class CharacterTaskListComponent implements OnInit {
         }
       }));
 
-      this.saving = true;
 
-      this.characterService.update(this.character, false)
-        .then(() => {
-          this.saving = false;
-        });
+      this.characterService.update(this.character, false);
     }
 
     this.editMode = !this.editMode;
@@ -135,6 +125,18 @@ export class CharacterTaskListComponent implements OnInit {
     this.draggingIndex = undefined;
   }
 
+
+  onTaskStateChange(eventArgs) {
+    
+    this.tasks = this.tasks.map(task => {
+      if (task._id == eventArgs.taskId) {
+        task.complete = eventArgs.complete
+      }
+      return task;
+    });
+
+    this.taskService.changeTaskState(eventArgs.characterId, eventArgs.taskId, eventArgs.complete);
+  }
 
 
 }

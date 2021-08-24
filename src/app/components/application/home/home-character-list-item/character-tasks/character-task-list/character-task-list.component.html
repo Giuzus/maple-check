@@ -24,14 +24,14 @@
                         <ng-container *ngFor="let task of tasks | filter:{ complete: false }">
                             <tr app-character-task-list-item *ngIf="!task.hidden || editMode" class="task-row"
                                 [task]="task" [character]="character"
-                                [editMode]="editMode" (priorityChanged)="priorityChanged($event)"></tr>
+                                [editMode]="editMode" (onTaskStateChange)="onTaskStateChange($event)"></tr>
                         </ng-container>
                     </tbody>
                     <tbody *ngIf="!editMode" class="complete-table">
                         <ng-container *ngFor="let task of tasks | filter:{ complete: true }">
                             <tr app-character-task-list-item *ngIf="!task.hidden || editMode" class="task-row"
                                 [task]="task" [character]="character"
-                                [editMode]="editMode" (priorityChanged)="priorityChanged($event)"></tr>
+                                [editMode]="editMode" (onTaskStateChange)="onTaskStateChange($event)"></tr>
                         </ng-container>
                     </tbody>
 
