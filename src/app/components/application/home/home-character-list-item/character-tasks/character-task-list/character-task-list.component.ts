@@ -33,6 +33,7 @@ export class CharacterTaskListComponent implements OnInit {
   ngOnInit(): void {
     this.tasks = this.filterTasks(this.taskService.getTasks());
     this.completedTasks = this.filterCompletedTasks(this.taskService.getCompletedTasks());
+    this.updateTasksProperties();
 
     this.taskService.tasksChanged.subscribe(() => {
       this.tasks = this.filterTasks(this.taskService.getTasks())
@@ -50,8 +51,6 @@ export class CharacterTaskListComponent implements OnInit {
       //Filter tasks 
       tasks = tasks.filter(task => task.type == this.type && task.repeats == this.repeats);
 
-      //Order by priority
-      tasks = _.orderBy(tasks, ['priority'], ['asc']);
       return tasks;
     }
   }
@@ -64,13 +63,19 @@ export class CharacterTaskListComponent implements OnInit {
   }
 
   updateTasksProperties() {
+    console.log(this.character);
     if (this.completedTasks && this.tasks) {
+      console.log("updateTasksProperties");
       this.tasks = this.tasks.map(task => {
         task.hidden = this.character?.configuration?.tasks.some(t => t.task == task._id && t.hidden);
         task.priority = this.character?.configuration?.tasks.findIndex(t => t.task == task._id);
         task.complete = this.completedTasks?.some(completed => completed.task == task._id);
         return task;
       });
+
+      //Order by priority
+      this.tasks = _.orderBy(this.tasks, ['priority'], ['asc']);
+
     }
   }
 
@@ -83,14 +88,15 @@ export class CharacterTaskListComponent implements OnInit {
 
       let taskIds = this.tasks.map(t => t._id);
 
-      //remove old task configuration
+      
       if (!this.character.configuration) {
         this.character.configuration = {
           hidden: false,
           tasks: []
         }
       }
-
+      
+      //remove old task configuration
       this.character.configuration.tasks = this.character.configuration.tasks.filter(config => !taskIds.includes(config.task));
 
       //Add new configuration
@@ -113,34 +119,19 @@ export class CharacterTaskListComponent implements OnInit {
     this.editMode = !this.editMode;
   }
 
-  priorityChanged(args: { taskId: String, direction: number }) {
-
-    let taskIndex = this.tasks.findIndex(t => t._id == args.taskId);
-
-    let nextIndex = taskIndex + args.direction;
-
-    if (nextIndex < 0 || nextIndex > this.tasks.length)
-      return;
-
-    this.tasks = arrayMove(this.tasks, taskIndex, nextIndex);
-  }
-
   draggingIndex: number;
   onDragStart(fromIndex: number): void {
-    console.log(fromIndex);
     this.draggingIndex = fromIndex;
   }
 
   onDragEnter(toIndex: number): void {
     if (this.draggingIndex !== toIndex) {
-      console.log(toIndex);
       this.tasks = arrayMove(this.tasks, this.draggingIndex, toIndex);
       this.draggingIndex = toIndex;
     }
   }
 
   onDragEnd(): void {
-    console.log("End");
     this.draggingIndex = undefined;
   }
 
