@@ -5,3 +5,13 @@
 .complete-table {
     opacity: 60%;
 }
+
+.draggable {
+    cursor: grab;
+    
+    &:active { 
+        cursor: grabbing;
+    }
+}
+
+

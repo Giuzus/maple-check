@@ -13,11 +13,8 @@ import { TaskService } from 'src/app/services/Task/task.service';
 export class CharacterTaskListItemComponent implements OnInit {
 
   @Input() task: Task;
-  @Input() completedTasks: CompletedTask[];
   @Input() character: Character;
   @Input() editMode: Boolean;
-
-  @Output() priorityChanged = new EventEmitter<{ taskId: String, direction: number }>();
 
   saving: boolean;
 
@@ -40,7 +37,4 @@ export class CharacterTaskListItemComponent implements OnInit {
     this.task.hidden = !this.task.hidden;
   }
 
-  changePriority(direction: number) {
-    this.priorityChanged.emit({ taskId: this.task._id, direction: direction });
-  }
 }

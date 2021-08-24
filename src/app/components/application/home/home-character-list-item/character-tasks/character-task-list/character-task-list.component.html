@@ -19,25 +19,35 @@
             <hr>
             <div *ngIf="tasks && completedTasks; else loader">
                 <table class="table table-hover mt-1">
+                    <!-- not editing -->
                     <tbody *ngIf="!editMode">
                         <ng-container *ngFor="let task of tasks | filter:{ complete: false }">
                             <tr app-character-task-list-item *ngIf="!task.hidden || editMode" class="task-row"
-                                [task]="task" [completedTasks]="completedTasks" [character]="character"
+                                [task]="task" [character]="character"
                                 [editMode]="editMode" (priorityChanged)="priorityChanged($event)"></tr>
                         </ng-container>
                     </tbody>
                     <tbody *ngIf="!editMode" class="complete-table">
                         <ng-container *ngFor="let task of tasks | filter:{ complete: true }">
                             <tr app-character-task-list-item *ngIf="!task.hidden || editMode" class="task-row"
-                                [task]="task" [completedTasks]="completedTasks" [character]="character"
+                                [task]="task" [character]="character"
                                 [editMode]="editMode" (priorityChanged)="priorityChanged($event)"></tr>
                         </ng-container>
                     </tbody>
-                    <tbody *ngIf="editMode">
-                        <ng-container *ngFor="let task of tasks">
-                            <tr app-character-task-list-item *ngIf="!task.hidden || editMode" class="task-row"
-                                [task]="task" [completedTasks]="completedTasks" [character]="character"
-                                [editMode]="editMode" (priorityChanged)="priorityChanged($event)"></tr>
+
+                    <!-- editing -->
+                    <tbody *ngIf="editMode" [class.dragging]="this.draggingIndex">
+                        <ng-container *ngFor="let task of tasks; let index = index">
+                                <tr app-character-task-list-item *ngIf="!task.hidden || editMode" class="task-row draggable"
+                                    [task]="task" 
+                                    [character]="character"
+                                    [editMode]="editMode"
+                                    [draggable]="true"
+                                    (dragstart)="onDragStart(index)"
+                                    (dragenter)="onDragEnter(index)"
+                                    (dragend)="onDragEnd()">
+                                </tr>
+                            
                         </ng-container>
                     </tbody>
                 </table>

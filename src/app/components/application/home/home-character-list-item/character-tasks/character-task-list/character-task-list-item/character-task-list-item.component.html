@@ -9,14 +9,6 @@
 </td>
 
 <td *ngIf="editMode" class="text-right p-1">
-    <a class="btn btn-light" role="button" (click)="changePriority(-1)">
-        <i-bs name="chevron-up"></i-bs>
-    </a>
-
-    <a class="btn btn-light" role="button" (click)="changePriority(1)">
-        <i-bs name="chevron-down"></i-bs>
-    </a>
-
     <a class="btn btn-light" role="button" (click)="toggleHiddenState()">
         <i-bs class="text-danger" *ngIf="task.hidden" name="eye-slash-fill"></i-bs>
         <i-bs *ngIf="!task.hidden" name="eye-fill"></i-bs>
