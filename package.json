@@ -12,16 +12,17 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~12.1.2",
-    "@angular/common": "~12.1.2",
-    "@angular/compiler": "~12.1.2",
-    "@angular/core": "~12.1.2",
-    "@angular/forms": "~12.1.2",
-    "@angular/localize": "~12.1.2",
-    "@angular/platform-browser": "~12.1.2",
-    "@angular/platform-browser-dynamic": "~12.1.2",
-    "@angular/router": "~12.1.2",
+    "@angular/animations": "~13.3.11",
+    "@angular/common": "~13.3.11",
+    "@angular/compiler": "~13.3.11",
+    "@angular/core": "~13.3.11",
+    "@angular/forms": "~13.3.11",
+    "@angular/localize": "~13.3.11",
+    "@angular/platform-browser": "~13.3.11",
+    "@angular/platform-browser-dynamic": "~13.3.11",
+    "@angular/router": "~13.3.11",
     "@ng-bootstrap/ng-bootstrap": "^8.0.0",
+    "@ngrx/store": "^13.2.0",
     "array-move": "^3.0.1",
     "bootstrap": "^4.6.0",
     "lodash": "^4.17.21",
@@ -33,14 +34,14 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^12.1.2",
-    "@angular/cli": "^12.1.2",
-    "@angular/compiler-cli": "~12.1.2",
+    "@angular-devkit/build-angular": "^14.0.1",
+    "@angular/cli": "^13.3.7",
+    "@angular/compiler-cli": "~13.3.11",
     "@types/jasmine": "~3.6.0",
     "@types/lodash": "^4.14.171",
     "@types/node": "^12.11.1",
     "angular-cli-ghpages": "^1.0.0-rc.1",
-    "codelyzer": "^6.0.0",
+    "codelyzer": "^0.0.28",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "^6.3.4",
@@ -51,6 +52,6 @@
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~4.3.5"
+    "typescript": "~4.6.4"
   }
 }

@@ -39,6 +39,7 @@ import { CharacterTaskListItemComponent } from './components/application/home/ho
 import { HomeCharacterListItemComponent } from './components/application/home/home-character-list-item/home-character-list-item.component';
 import { NgxBootstrapIconsModule, allIcons } from 'ngx-bootstrap-icons';
 import { SortPipe } from './pipes/sort/sort.pipe';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { SortPipe } from './pipes/sort/sort.pipe';
     NgbModule,
     AppRoutingModule,
     FormsModule,
-    NgxBootstrapIconsModule.pick(allIcons)
+    NgxBootstrapIconsModule.pick(allIcons),
+    StoreModule.forRoot({}, {})
   ],
   providers: [
     {
