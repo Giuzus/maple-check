@@ -116,5 +116,7 @@
       "style": "scss"
     }
   },
-  "defaultProject": "maple-check"
+  "cli": {
+    "analytics": false
+  }
 }
