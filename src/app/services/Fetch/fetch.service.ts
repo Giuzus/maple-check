@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { promise } from 'protractor';
 import { AuthError } from 'src/app/models/AuthError';
 import { environment } from 'src/environments/environment';
 

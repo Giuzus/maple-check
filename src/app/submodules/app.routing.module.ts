@@ -1,15 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from '../components/application/home/home.component';
+import { HomeComponent } from '../components/home/home.component';
 import { LoginComponent } from '../components/login/login.component';
 import { AuthenticationGuard } from '../guards/authentication.guard';
-import { ApplicationComponent } from '../components/application/application.component';
-import { TasksComponent } from '../components/application/tasks/tasks.component';
-import { NewTaskComponent } from '../components/application/tasks/new-task/new-task.component';
-import { EditTaskComponent } from '../components/application/tasks/edit-task/edit-task.component';
-import { CharactersComponent } from '../components/application/characters/characters.component';
-import { NewCharacterComponent } from '../components/application/characters/new-character/new-character.component';
-import { EditCharacterComponent } from '../components/application/characters/edit-character/edit-character.component';
+import { ApplicationComponent } from '../components/application.component';
+import { TasksComponent } from '../components/tasks/tasks.component';
+import { CharactersComponent } from '../components/characters/characters.component';
+import { TaskFormComponent } from '../components/tasks/task-form/task-form.component';
+import { CharacterFormComponent } from '../components/characters/character-form/character-form.component';
 
 const routes: Routes = [
     {
@@ -35,11 +33,11 @@ const routes: Routes = [
                 children: [
                     {
                         path: 'new',
-                        component: NewTaskComponent
+                        component: TaskFormComponent
                     },
                     {
                         path: 'edit/:id',
-                        component: EditTaskComponent
+                        component: TaskFormComponent
                     },
                     {
                         path: '',
@@ -52,11 +50,11 @@ const routes: Routes = [
                 children: [
                     {
                         path: 'new',
-                        component: NewCharacterComponent
+                        component: CharacterFormComponent
                     },
                     {
                         path: 'edit/:id',
-                        component: EditCharacterComponent
+                        component: CharacterFormComponent
                     },
                     {
                         path: '',

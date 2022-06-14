@@ -1,0 +1,7 @@
+<td>
+    {{ character.name }}
+</td>
+<td>
+        <a [routerLink]="['edit',character._id]">Edit</a> |
+        <a class="text-danger" role="button" (click)="delete(character._id)">Delete</a>
+</td>

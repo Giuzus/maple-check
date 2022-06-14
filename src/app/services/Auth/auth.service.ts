@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/models/User';
 
 import { environment } from 'src/environments/environment';
-import { FetchService } from '../Fetch/fetch.service';
+import { FetchService } from '../fetch/fetch.service';
 
 @Injectable({
   providedIn: 'root'

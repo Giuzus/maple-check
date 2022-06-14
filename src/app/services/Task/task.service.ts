@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { CompletedTask } from 'src/app/models/CoompletedTask';
 import { Task } from 'src/app/models/Task';
-import { FetchService } from '../Fetch/fetch.service';
+import { FetchService } from '../fetch/fetch.service';
 import * as _ from 'lodash';
 
 @Injectable({

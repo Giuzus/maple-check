@@ -1,0 +1,29 @@
+<div class="container">
+
+    <button class="btn btn-primary bottom-right-floating-button" routerLink="new">New character</button>
+
+    <div class="d-flex mb-3">
+        <h2>Characters</h2>
+    </div>
+
+
+    <table *ngIf="(charactersStatus$ | async) == 'success'; else loader" class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr app-character-list-item *ngFor="let char of characters$ | async" [character]="char"> </tr>
+        </tbody>
+    </table>
+
+    <ng-template #loader>
+        <app-loader [size]="'150px'"></app-loader>
+    </ng-template>
+</div>
