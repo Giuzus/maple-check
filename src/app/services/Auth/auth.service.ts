@@ -60,12 +60,6 @@ export class AuthService {
   }
 
   async logout() {
-    this.delete_cookie("auth");
-    location.href = "/";
+    location.href = environment.apiEndpoint + "/auth/logout?redirect=" + location.href
   }
-
-  delete_cookie = function (name) {
-    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-  }
-
 }
