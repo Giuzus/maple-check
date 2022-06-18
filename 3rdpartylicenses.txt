@@ -50,6 +50,9 @@ MIT
 @ngrx/store
 MIT
 
+@ngrx/store-devtools
+MIT
+
 @popperjs/core
 MIT
 The MIT License (MIT)
