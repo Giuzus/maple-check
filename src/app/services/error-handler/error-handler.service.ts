@@ -2,6 +2,7 @@ import { ErrorHandler, Injectable, Injector, NgZone } from '@angular/core';
 import { AuthError } from 'src/app/models/AuthError';
 import { AuthService } from '../auth/auth.service';
 import { ModalService } from '../modal/modal.service';
+import { ToastService } from '../toast/toast.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class ErrorHandlerService implements ErrorHandler {
 
   handleError(error): void {
 
-    const modalService = this.injector.get(ModalService);
+    const toastService = this.injector.get(ToastService);
     const authService = this.injector.get(AuthService);
     const zone = this.injector.get(NgZone);
 
@@ -23,7 +24,7 @@ export class ErrorHandlerService implements ErrorHandler {
         authService.signIn();
         return;
       }
-      modalService.show("ERROR", error.message);
+      toastService.show("ERROR", error.message);
     });
 
     console.error(error);

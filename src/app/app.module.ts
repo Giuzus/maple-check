@@ -24,9 +24,7 @@ import { ErrorHandlerService } from './services/error-handler/error-handler.serv
 import { ToastComponent } from './components/toast/toast.component';
 import { TasksComponent } from './components/tasks/tasks.component';
 import { TaskFormComponent } from './components/tasks/task-form/task-form.component';
-import { NewTaskComponent } from './components/tasks/new-task/new-task.component';
 import { EnumToArrayPipe } from './pipes/enum-to-array/enum-to-array.pipe';
-import { EditTaskComponent } from './components/tasks/edit-task/edit-task.component';
 import { CharactersComponent } from './components/characters/characters.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { CharacterFormComponent } from './components/characters/character-form/character-form.component';
@@ -41,6 +39,8 @@ import { SortPipe } from './pipes/sort/sort.pipe';
 import { EffectsModule } from '@ngrx/effects';
 import { characterReducer } from './state/characters/character.reducer';
 import { CharacterEffects } from './state/characters/character.effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -54,9 +54,7 @@ import { CharacterEffects } from './state/characters/character.effects';
     ToastComponent,
     TasksComponent,
     TaskFormComponent,
-    NewTaskComponent,
     EnumToArrayPipe,
-    EditTaskComponent,
     CharactersComponent,
     LoaderComponent,
     CharacterFormComponent,
@@ -77,6 +75,7 @@ import { CharacterEffects } from './state/characters/character.effects';
     NgxBootstrapIconsModule.pick(allIcons),
     StoreModule.forRoot({ characters: characterReducer  }, {}),
     EffectsModule.forRoot([CharacterEffects]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [
     {
