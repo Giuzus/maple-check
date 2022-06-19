@@ -11,14 +11,12 @@ import { selectCharacterStateStatus, selectAllCharacters } from 'src/app/state/c
 })
 export class CharactersComponent implements OnInit {
 
-  characters$: Observable<Character[]>
-  charactersStatus$: Observable<String>
+  characters$: Observable<Character[]> = this.store.select(selectAllCharacters);
+  charactersStatus$: Observable<String> = this.store.select(selectCharacterStateStatus);
 
   constructor(private store: Store) { }
 
   ngOnInit(): void {
-    this.characters$ = this.store.select(selectAllCharacters);
-    this.charactersStatus$ = this.store.select(selectCharacterStateStatus)
   }
 
   

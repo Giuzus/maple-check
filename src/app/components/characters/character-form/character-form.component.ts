@@ -22,7 +22,7 @@ export class CharacterFormComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.activatedRoute.params.subscribe(async params => {
+    this.activatedRoute.params.subscribe(params => {
       let id = params["id"];
       if(id){
         console.log("We editin")

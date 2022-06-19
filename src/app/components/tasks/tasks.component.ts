@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { Task } from 'src/app/models/Task';
-import { TaskService } from 'src/app/services/task/task.service';
-
+import { allTasks, selectTaskStateStatus } from 'src/app/state/tasks/task.selector';
 
 @Component({
   selector: 'app-tasks',
@@ -10,15 +11,12 @@ import { TaskService } from 'src/app/services/task/task.service';
 })
 export class TasksComponent implements OnInit {
 
-  tasks: Task[];
+  tasks$: Observable<Task[]> = this.store.select(allTasks);
+  taskStateStatus$: Observable<string> = this.store.select(selectTaskStateStatus);
 
-  constructor(private taskService: TaskService) { }
+  constructor(private store: Store) { }
 
-  ngOnInit(): void {
-
-    this.tasks = this.taskService.getTasks();
-    this.taskService.tasksChanged.subscribe(() => this.tasks = this.taskService.getTasks());
-  }
+  ngOnInit(): void {  }
 
   
 }

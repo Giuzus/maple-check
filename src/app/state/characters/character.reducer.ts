@@ -1,10 +1,19 @@
 import { createReducer, on } from '@ngrx/store';
+import { infinity } from 'ngx-bootstrap-icons';
 import { Character } from 'src/app/models/Character';
-import { addCharacter, deleteCharacter, loadCharacters, loadCharactersSuccess, loadCharactersFailure, updateCharacter } from './character.actions';
+import {
+  addCharacter,
+  deleteCharacter,
+  loadCharacters,
+  loadCharactersSuccess,
+  apiFailure,
+  updateCharacter,
+  hideTask
+} from './character.actions';
 
 export interface CharacterState {
   characters: Character[];
-  error: string;
+  error: String;
   status: 'pending' | 'loading' | 'error' | 'success';
 }
 
@@ -15,29 +24,17 @@ export const initialState: CharacterState = {
 };
 
 export const characterReducer = createReducer(
-  
-    // Supply the initial state
-  initialState,
-  
-  // Add the new character to the characters array
-  on(addCharacter, (state, { character }) => ({
-    ...state,
-    characters: [...state.characters, character],
-  })),
-  
-  // Update character in the character array
-  on(updateCharacter, (state, { character }) => ({
-    ...state,
-    characters:  state.characters.map(char => char._id == character._id ? character : char)
-  })),
 
-  // Remove the character from the characters array
-  on(deleteCharacter, (state, { id }) => ({
-    ...state,
-    characters: state.characters.filter((character) => character._id !== id),
-  })),
-  
-  // Trigger loading the characters
+  // Supply the initial state
+  initialState,
+
+  // Add the new character to the characters array
+  on(addCharacter, (state) => ({ ...state, status: 'loading' })),
+
+  on(updateCharacter, (state) => ({ ...state, status: 'loading' })),
+
+  on(deleteCharacter, (state) => ({ ...state, status: 'loading' })),
+
   on(loadCharacters, (state) => ({ ...state, status: 'loading' })),
 
   // Handle successfully loaded characters
@@ -48,10 +45,32 @@ export const characterReducer = createReducer(
     status: 'success',
   })),
 
-  // Handle characters load failure
-  on(loadCharactersFailure, (state, { error }) => ({
+  on(apiFailure, (state, { error }) => ({
     ...state,
     error: error,
     status: 'error',
-  }))
+  })),
+
+  on(hideTask, (state, { characterId, taskId, hidden }) => {
+    
+    let character: Character = state.characters.find(char => char._id == characterId);
+
+    let characterClone: Character = { ...character };
+    characterClone.configuration = { ...character.configuration };
+
+    if (characterClone.configuration?.tasks?.some(taskConfig => taskConfig.task == taskId)) {
+      //update
+      characterClone.configuration.tasks = characterClone.configuration.tasks.map(taskConfig => taskConfig.task == taskId ? { ...taskConfig, hidden: hidden } : taskConfig);
+    }
+    else {
+      //add
+      characterClone.configuration.tasks.push({ task: taskId, hidden: hidden, priority: null })
+    }
+
+    return {
+      ...state,
+      characters: state.characters.map(c => c._id == character._id ? characterClone : c)
+    };
+
+  }),
 );

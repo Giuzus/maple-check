@@ -1,4 +1,4 @@
-<div *ngIf="!editMode" class="overlay" (click)="changeTaskState()"></div>
+<div *ngIf="!editMode" class="overlay" (click)="toggleComplete()"></div>
 
 <td class="task-image-td"><img class="task-image" src="{{task.image}}" /> </td>
 <td> {{ task.name }} </td>

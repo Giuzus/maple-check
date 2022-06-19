@@ -17,7 +17,7 @@
         </div>
         <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
             <hr>
-            <div *ngIf="tasks && completedTasks; else loader">
+            <div *ngIf="tasks$ | async as tasks; else loader">
                 <table class="table table-hover mt-1">
                     <!-- not editing -->
                     <tbody *ngIf="!editMode">
@@ -31,7 +31,7 @@
                         <ng-container *ngFor="let task of tasks | filter:{ complete: true }">
                             <tr app-character-task-list-item *ngIf="!task.hidden || editMode" class="task-row"
                                 [task]="task" [character]="character"
-                                [editMode]="editMode" (onTaskStateChange)="onTaskStateChange($event)"></tr>
+                                [editMode]="editMode"></tr>
                         </ng-container>
                     </tbody>
 

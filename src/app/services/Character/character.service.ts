@@ -19,7 +19,7 @@ export class CharacterService {
         await this.fetchService.post("characters", character);
     }
 
-    async update(character: Character, emitChanged: Boolean = true) {
+    async update(character: Character) {
         await this.fetchService.put("characters", character);
     }
 

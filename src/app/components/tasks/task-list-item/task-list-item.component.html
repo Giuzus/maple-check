@@ -11,9 +11,8 @@
     {{ task.default }}
 </td>
 <td>
-    <div *ngIf="!task.default && !deleting">
+    <div *ngIf="!task.default">
         <a [routerLink]="['edit',task._id]">Edit</a> |
         <a class="text-danger" role="button" (click)="delete(task._id)">Delete</a>
     </div>
-    <app-loader *ngIf="deleting" [size]="'25px'"></app-loader>
 </td>

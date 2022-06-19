@@ -1,7 +1,7 @@
 export class CompletedTask {
 
-    public _id: string;
-    public character: string;
-    public task: string;
+    public _id: String;
+    public character: String;
+    public task: String;
     public date: Date;
 }

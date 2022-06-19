@@ -28,19 +28,22 @@ import { EnumToArrayPipe } from './pipes/enum-to-array/enum-to-array.pipe';
 import { CharactersComponent } from './components/characters/characters.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { CharacterFormComponent } from './components/characters/character-form/character-form.component';
-import { CharacterTasksComponent } from './components/home/home-character-list-item/character-tasks/character-tasks.component';
+import { CharacterTasksComponent } from './components/home/character-tasks/character-tasks.component';
 import { FilterPipe } from './pipes/filter/filter.pipe';
-import { CharacterTaskListComponent } from './components/home/home-character-list-item/character-tasks/character-task-list/character-task-list.component';
+import { CharacterTaskListComponent } from './components/home/character-tasks/character-task-list/character-task-list.component';
 import { CharacterListItemComponent } from './components/characters/character-list-item/character-list-item.component';
 import { TaskListItemComponent } from './components/tasks/task-list-item/task-list-item.component';
-import { CharacterTaskListItemComponent } from './components/home/home-character-list-item/character-tasks/character-task-list/character-task-list-item/character-task-list-item.component';
-import { HomeCharacterListItemComponent } from './components/home/home-character-list-item/home-character-list-item.component';
+import { CharacterTaskListItemComponent } from './components/home/character-tasks/character-task-list/character-task-list-item/character-task-list-item.component';
 import { SortPipe } from './pipes/sort/sort.pipe';
 import { EffectsModule } from '@ngrx/effects';
 import { characterReducer } from './state/characters/character.reducer';
 import { CharacterEffects } from './state/characters/character.effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { CompletedTaskEffects } from './state/completedTasks/completed-tasks.effects';
+import { completedTaskReducer } from './state/completedTasks/completed-task.reducer';
+import { taskReducer } from './state/tasks/task.reducer';
+import { TaskEffects } from './state/tasks/task.effects';
 
 
 @NgModule({
@@ -63,7 +66,6 @@ import { environment } from '../environments/environment';
     CharacterTaskListComponent,
     CharacterTaskListItemComponent,
     CharacterListItemComponent,
-    HomeCharacterListItemComponent,
     TaskListItemComponent,
     SortPipe
   ],
@@ -73,8 +75,16 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
     FormsModule,
     NgxBootstrapIconsModule.pick(allIcons),
-    StoreModule.forRoot({ characters: characterReducer  }, {}),
-    EffectsModule.forRoot([CharacterEffects]),
+    StoreModule.forRoot({
+      characters: characterReducer,
+      completedTasks: completedTaskReducer,
+      tasks: taskReducer
+    }, {}),
+    EffectsModule.forRoot([
+      CharacterEffects,
+      CompletedTaskEffects,
+      TaskEffects
+    ]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [

@@ -8,6 +8,7 @@ import { TasksComponent } from '../components/tasks/tasks.component';
 import { CharactersComponent } from '../components/characters/characters.component';
 import { TaskFormComponent } from '../components/tasks/task-form/task-form.component';
 import { CharacterFormComponent } from '../components/characters/character-form/character-form.component';
+import { CharacterTasksComponent } from '../components/home/character-tasks/character-tasks.component';
 
 const routes: Routes = [
     {
@@ -26,7 +27,18 @@ const routes: Routes = [
             },
             {
                 path: 'home',
-                component: HomeComponent
+                component: HomeComponent,
+                children:[
+                    {
+                        path: ':id',
+                        component: CharacterTasksComponent
+                    },
+                    {
+                        path: '',
+                        pathMatch:"full",
+                        component: CharacterTasksComponent
+                    }
+                ]
             },
             {
                 path: 'tasks',

@@ -1,0 +1,15 @@
+<div *ngIf="character$ | async as character">
+    <h1 class="m-2"> {{character.name}} </h1>
+
+    <app-character-task-list [label]="'Daily quests'" [character]="character" [type]="'QUEST'" [repeats]="'DAILY'">
+    </app-character-task-list>
+
+    <app-character-task-list [label]="'Daily bosses'" [character]="character" [type]="'BOSS'" [repeats]="'DAILY'">
+    </app-character-task-list>
+
+    <app-character-task-list [label]="'Weekly quests'" [character]="character" [type]="'QUEST'" [repeats]="'WEEKLY'">
+    </app-character-task-list>
+
+    <app-character-task-list [label]="'Weekly bosses'" [character]="character" [type]="'BOSS'" [repeats]="'WEEKLY'">
+    </app-character-task-list>
+</div>
