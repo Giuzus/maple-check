@@ -28,7 +28,7 @@ export const completedTaskReducer = createReducer(
 
     return {
       ...state,
-      completedTask: [...state.completedTasks, completedTask],
+      completedTasks: [...state.completedTasks, completedTask],
     }
   }),
 

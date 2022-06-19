@@ -40,5 +40,8 @@ export const taskReducer = createReducer(
     ...state,
     error: error,
     status: 'error',
-  }))
+  })),
+
+  
+  
 );

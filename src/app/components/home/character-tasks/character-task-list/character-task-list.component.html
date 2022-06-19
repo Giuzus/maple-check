@@ -17,8 +17,8 @@
         </div>
         <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
             <hr>
-            <div *ngIf="tasks$ | async as tasks; else loader">
-                <table class="table table-hover mt-1">
+            <div *ngIf="(taskStateStatus$ | async) == 'success' && (completedTaskStateStatus$ | async) == 'success'; else loader">
+                <table *ngIf="tasks$ | async as tasks" class="table table-hover mt-1">
                     <!-- not editing -->
                     <tbody *ngIf="!editMode">
                         <ng-container *ngFor="let task of tasks | filter:{ complete: false }">

@@ -1,11 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { brush } from 'ngx-bootstrap-icons';
 import { Character } from 'src/app/models/Character';
-import { CompletedTask } from 'src/app/models/CoompletedTask';
 import { Task } from 'src/app/models/Task';
-import { TaskService } from 'src/app/services/task/task.service';
 import { hideTask } from 'src/app/state/characters/character.actions';
+import { setComplete, setIncomplete } from 'src/app/state/completedTasks/completed-task.actions';
 
 @Component({
   selector: '[app-character-task-list-item]',
@@ -18,24 +16,23 @@ export class CharacterTaskListItemComponent implements OnInit {
   @Input() character: Character;
   @Input() editMode: Boolean;
 
-  saving: boolean;
-
   constructor(private store: Store) { }
 
   ngOnInit(): void { }
 
   async toggleComplete() {
 
-    // this.onTaskStateChange.emit({
-    //   characterId: this.character._id,
-    //   taskId: this.task._id,
-    //   complete: !this.task.complete
-    // });
+    if (this.task.complete) {
+      this.store.dispatch(setIncomplete({ characterId: this.character._id, taskId: this.task._id }));
+    }
+    else {
+      this.store.dispatch(setComplete({ characterId: this.character._id, taskId: this.task._id }));
+    }
   }
 
   toggleHiddenState() {
-    
-    this.store.dispatch(hideTask({characterId: this.character._id, taskId: this.task._id, hidden: !this.task.hidden}))
+
+    this.store.dispatch(hideTask({ characterId: this.character._id, taskId: this.task._id, hidden: !this.task.hidden }))
 
   }
 

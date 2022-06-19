@@ -5,7 +5,7 @@ import { from, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { TaskService } from 'src/app/services/task/task.service';
 import { AppState } from '../app.state';
-import { loadCompletedTasks, loadCompletedTasksFailure, loadCompletedTasksSuccess } from './completed-task.actions';
+import { loadCompletedTasks, loadCompletedTasksFailure, loadCompletedTasksSuccess, setComplete, setIncomplete } from './completed-task.actions';
 
 @Injectable()
 export class CompletedTaskEffects {
@@ -14,6 +14,26 @@ export class CompletedTaskEffects {
         private store: Store<AppState>,
         private taskService: TaskService
     ) { }
+
+    setIncomplete$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(setIncomplete),
+            map((action) => this.taskService.changeTaskState(action.characterId,action.taskId, false))
+        ),
+        {
+            dispatch: false
+        }
+    );
+    
+    setComplete$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(setComplete),
+            map((action) => this.taskService.changeTaskState(action.characterId,action.taskId, true))
+        ),
+        {
+            dispatch: false
+        }
+    );
 
     loadCompletedTasks$ = createEffect(() =>
         this.actions$.pipe(

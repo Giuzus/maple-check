@@ -3,7 +3,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Character } from 'src/app/models/Character';
 import { Task } from 'src/app/models/Task';
-import { selectCharacterTasks } from 'src/app/state/tasks/task.selector';
+import { selectCompletedTaskStateStatus } from 'src/app/state/completedTasks/completed-task.selector';
+import { selectCharacterTasks, selectTaskStateStatus } from 'src/app/state/tasks/task.selector';
 
 @Component({
   selector: 'app-character-task-list',
@@ -19,6 +20,9 @@ export class CharacterTaskListComponent implements OnChanges {
   @Input() repeats: String;
 
   tasks$: Observable<Task[]>;
+
+  taskStateStatus$: Observable<String> = this.store.select(selectTaskStateStatus);
+  completedTaskStateStatus$: Observable<String> = this.store.select(selectCompletedTaskStateStatus);
 
   editMode: Boolean;
   isCollapsed: boolean = false;
