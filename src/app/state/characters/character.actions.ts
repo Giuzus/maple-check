@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { Character } from 'src/app/models/Character';
+import { Task } from 'src/app/models/Task';
 
 export const addCharacter = createAction(
   '[Character Page] Add Character',
@@ -32,4 +33,9 @@ export const apiFailure = createAction(
 export const hideTask = createAction(
   '[Home] hide task',
   props<{ characterId: String, taskId: String, hidden: Boolean }>()
+);
+
+export const updateTaskPriorities = createAction(
+  '[Home] update task priorities',
+  props<{ characterId: String, tasks: Task[] }>()
 );

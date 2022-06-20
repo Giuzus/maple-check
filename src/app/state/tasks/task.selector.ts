@@ -25,7 +25,7 @@ export const selectCharacterTasks = (characterId: String, type: String, repeats:
             .map(task => {
                 task = { ...task }
                 task.hidden = character?.configuration?.tasks.some(t => t.task == task._id && t.hidden);
-                task.priority = character?.configuration?.tasks.findIndex(t => t.task == task._id);
+                task.priority = character?.configuration?.tasks.find(t => t.task == task._id)?.priority;
                 task.complete = completedTasks?.some(completed => completed.task == task._id);
                 return task;
             });

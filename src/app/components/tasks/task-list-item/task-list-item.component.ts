@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Task } from 'src/app/models/Task';
-import { TaskService } from 'src/app/services/task/task.service';
 import { deleteTask } from 'src/app/state/tasks/task.actions';
 
 @Component({

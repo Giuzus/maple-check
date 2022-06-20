@@ -1,5 +1,4 @@
 import { createReducer, on } from '@ngrx/store';
-import { infinity } from 'ngx-bootstrap-icons';
 import { Character } from 'src/app/models/Character';
 import {
   addCharacter,
@@ -8,7 +7,8 @@ import {
   loadCharactersSuccess,
   apiFailure,
   updateCharacter,
-  hideTask
+  hideTask,
+  updateTaskPriorities
 } from './character.actions';
 
 export interface CharacterState {
@@ -57,14 +57,18 @@ export const characterReducer = createReducer(
 
     let characterClone: Character = { ...character };
     characterClone.configuration = { ...character.configuration };
+    characterClone.configuration.tasks = [...characterClone.configuration.tasks];
 
-    if (characterClone.configuration?.tasks?.some(taskConfig => taskConfig.task == taskId)) {
-      //update
+    if(characterClone.configuration.tasks.some(taskConfig => taskConfig.task == taskId))
+    {
       characterClone.configuration.tasks = characterClone.configuration.tasks.map(taskConfig => taskConfig.task == taskId ? { ...taskConfig, hidden: hidden } : taskConfig);
     }
-    else {
-      //add
-      characterClone.configuration.tasks = [...characterClone.configuration.tasks, { task: taskId, hidden: hidden, priority: -1 }];
+    else{
+      characterClone.configuration.tasks.push({
+        hidden: hidden,
+        task: taskId,
+        priority: null
+      });
     }
 
     return {
@@ -72,6 +76,35 @@ export const characterReducer = createReducer(
       characters: state.characters.map(c => c._id == character._id ? characterClone : c)
     };
 
+  }),
+
+  on(updateTaskPriorities, (state, { characterId, tasks }) => {
+
+    let character: Character = state.characters.find(char => char._id == characterId);
+
+    let characterClone: Character = { ...character };
+    characterClone.configuration = { ...character.configuration };
+    characterClone.configuration.tasks = [...characterClone.configuration.tasks];
+
+    tasks.map((task, newPriority )=> {
+      if(characterClone.configuration.tasks.some(config => config.task == task._id))
+      {
+        characterClone.configuration.tasks = characterClone.configuration.tasks.map(config => config.task == task._id ? { ...config, priority: newPriority } : config);
+      }
+      else
+      {
+        characterClone.configuration.tasks.push({
+          hidden: false,
+          task: task._id,
+          priority: newPriority
+        });
+      }
+    });
+
+    return {
+      ...state,
+      characters: state.characters.map(c => c._id == character._id ? characterClone : c)
+    };
   })
 
 );

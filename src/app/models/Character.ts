@@ -9,7 +9,7 @@ export class Character {
         tasks: {
             task: String,
             hidden: Boolean,
-            priority: Number,
+            priority: number,
         }[]
     }
 }

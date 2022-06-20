@@ -5,7 +5,7 @@ import { switchMap, map, catchError, withLatestFrom } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app.state';
 import { CharacterService } from 'src/app/services/character/character.service';
-import { addCharacter, deleteCharacter, loadCharacters, apiFailure, loadCharactersSuccess, updateCharacter, hideTask } from './character.actions';
+import { addCharacter, deleteCharacter, loadCharacters, apiFailure, loadCharactersSuccess, updateCharacter, hideTask, updateTaskPriorities } from './character.actions';
 import { selectCharacter } from './character.selector';
 
 @Injectable()
@@ -76,7 +76,7 @@ export class CharacterEffects {
     configurationChanged$ = createEffect(
         () =>
             this.actions$.pipe(
-                ofType(hideTask),
+                ofType(hideTask, updateTaskPriorities),
                 switchMap(action =>
                     of(action).pipe(
                         withLatestFrom(this.store.select(selectCharacter(action.characterId))),
