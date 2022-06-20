@@ -52,7 +52,7 @@ export const characterReducer = createReducer(
   })),
 
   on(hideTask, (state, { characterId, taskId, hidden }) => {
-    
+
     let character: Character = state.characters.find(char => char._id == characterId);
 
     let characterClone: Character = { ...character };
@@ -64,7 +64,7 @@ export const characterReducer = createReducer(
     }
     else {
       //add
-      characterClone.configuration.tasks.push({ task: taskId, hidden: hidden, priority: null })
+      characterClone.configuration.tasks = [...characterClone.configuration.tasks, { task: taskId, hidden: hidden, priority: -1 }];
     }
 
     return {
@@ -72,6 +72,6 @@ export const characterReducer = createReducer(
       characters: state.characters.map(c => c._id == character._id ? characterClone : c)
     };
 
-  }),
+  })
 
 );

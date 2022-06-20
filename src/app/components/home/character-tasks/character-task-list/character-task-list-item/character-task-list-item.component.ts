@@ -31,7 +31,7 @@ export class CharacterTaskListItemComponent implements OnInit {
   }
 
   toggleHiddenState() {
-
+    
     this.store.dispatch(hideTask({ characterId: this.character._id, taskId: this.task._id, hidden: !this.task.hidden }))
 
   }
