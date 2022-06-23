@@ -1,8 +1,8 @@
-name: Node.js CI
+name: Deploy prod
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, development ]
 
 jobs:
   build:
@@ -22,5 +22,5 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci --legacy-peer-deps
-    - run: npm run deploy:prod
+    - run: npm run build
     
