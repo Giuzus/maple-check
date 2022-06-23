@@ -1,7 +1,6 @@
 import { ErrorHandler, Injectable, Injector, NgZone } from '@angular/core';
 import { AuthError } from 'src/app/models/AuthError';
 import { AuthService } from '../auth/auth.service';
-import { ModalService } from '../modal/modal.service';
 import { ToastService } from '../toast/toast.service';
 
 @Injectable({

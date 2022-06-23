@@ -12,6 +12,8 @@ import { StoreModule } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from './services/auth/auth.service';
 import { ToastService } from './services/toast/toast.service';
+import { ErrorHandlerService } from './services/error-handler/error-handler.service';
+
 
 //Declarations
 import { AppComponent } from './app.component';
@@ -20,7 +22,6 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { ApplicationComponent } from './components/application.component';
 import { ModalComponent } from './components/modal/modal.component';
-import { ErrorHandlerService } from './services/error-handler/error-handler.service';
 import { ToastComponent } from './components/toast/toast.component';
 import { TasksComponent } from './components/tasks/tasks.component';
 import { TaskFormComponent } from './components/tasks/task-form/task-form.component';
