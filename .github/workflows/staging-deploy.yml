@@ -2,7 +2,7 @@ name: Prod deploy
 
 on:
   push:
-    branches: [ main ]
+    branches: [ development ]
 
 jobs:
   deploy:
@@ -21,11 +21,12 @@ jobs:
 
     - name: Build
       run: | 
-        npm run build:prod
+        npm run build:staging
         cp dist/maple-check/index.html dist/maple-check/404.html 
 
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3.7.3
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+        external_repository: giuzus/maple-check-staging
         publish_dir: dist/maple-check
