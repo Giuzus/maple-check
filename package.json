@@ -5,6 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:prod": "ng build --base-href=https://giuzus.github.io/maple-check/",
+    "build:staging": "ng build --base-href=https://giuzus.github.io/maple-check-staging/",
     "deploy:prod": "ng deploy --base-href=https://giuzus.github.io/maple-check/",
     "deploy:staging": "ng deploy --build-target=maple-check:build:development --base-href=https://giuzus.github.io/maple-check-staging/ --repo=https://github.com/Giuzus/maple-check-staging.git",
     "test": "ng test",

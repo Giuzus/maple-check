@@ -1,4 +1,4 @@
-name: GitHub Pages
+name: Prod deploy
 
 on:
   push:
@@ -20,7 +20,7 @@ jobs:
       run: npm install --legacy-peer-deps
 
     - name: Build
-      run: npm run build
+      run: npm run build:prod
 
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3.7.3
