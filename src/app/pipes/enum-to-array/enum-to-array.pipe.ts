@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class EnumToArrayPipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
+  transform(value: any): {name: string, value: string}[] {
     return Object.keys(value).map(o => { return { name: o, value: value[o] } });
   }
 

@@ -1,0 +1,32 @@
+name: Prod deploy
+
+on:
+  push:
+    branches: [ development ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+
+    - name: Install dependencies
+      run: npm install --legacy-peer-deps
+
+    - name: Build
+      run: | 
+        npm run build:staging
+        cp dist/maple-check/index.html dist/maple-check/404.html 
+
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3.7.3
+      with:
+        deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+        external_repository: giuzus/maple-check-staging
+        publish_dir: dist/maple-check

@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiEndpoint: 'http://localhost:5001',
-  // apiEndpoint: 'https://maple-check-api-staging.herokuapp.com',
+  //apiEndpoint: 'http://localhost:5001',
+  apiEndpoint: 'https://maple-check-api-staging.herokuapp.com',
   redirectUrl: 'http://localhost:4200'
 };
 
