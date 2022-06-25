@@ -4,8 +4,7 @@
 <td> {{ task.name }} </td>
 
 <td *ngIf="!editMode" class="checkbox-td">
-    <input *ngIf="!saving" type="checkbox" class="" [checked]="task.complete" />
-    <app-loader *ngIf="saving" [size]="'25px'"></app-loader>
+    <input type="checkbox" class="" [checked]="task.complete" />
 </td>
 
 <td *ngIf="editMode" class="text-right p-1">

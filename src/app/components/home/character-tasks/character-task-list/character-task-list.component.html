@@ -9,9 +9,8 @@
             <div class="float-right">
 
                 <a class="btn btn-light" role="button" *ngIf="!isCollapsed" (click)="toggleEditMode()">
-                    <i-bs *ngIf="!editMode && !saving" name="pencil-square"></i-bs>
-                    <i-bs *ngIf="editMode && !saving" class="text-success" name="check-circle-fill"></i-bs>
-                    <app-loader [size]="'25px'" *ngIf="saving"></app-loader>
+                    <i-bs *ngIf="!editMode" name="pencil-square"></i-bs>
+                    <i-bs *ngIf="editMode" class="text-success" name="check-circle-fill"></i-bs>
                 </a>
             </div>
         </div>
@@ -24,7 +23,7 @@
                         <ng-container *ngFor="let task of tasks | filter:{ complete: false }">
                             <tr app-character-task-list-item *ngIf="!task.hidden || editMode" class="task-row"
                                 [task]="task" [character]="character"
-                                [editMode]="editMode" (onTaskStateChange)="onTaskStateChange($event)"></tr>
+                                [editMode]="editMode"></tr>
                         </ng-container>
                     </tbody>
                     <tbody *ngIf="!editMode" class="complete-table">

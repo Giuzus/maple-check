@@ -17,14 +17,14 @@ jobs:
         node-version: '16'
 
     - name: Install dependencies
-      run: npm install --legacy-peer-deps
+      run: npm install
 
     - name: Build
       run: npm run build
 
-    - name: Deploy
-      if: success()
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: dist/angular-github-actions
+    # - name: Deploy
+    #   if: success()
+    #   uses: peaceiris/actions-gh-pages@v3
+    #   with:
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}
+    #     publish_dir: dist/angular-github-actions

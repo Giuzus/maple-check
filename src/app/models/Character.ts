@@ -1,6 +1,6 @@
 export class Character {
 
-    public _id: String;
+    public _id: string;
 
     public name: String;
 
