@@ -45,6 +45,7 @@ import { CompletedTaskEffects } from './state/completedTasks/completed-tasks.eff
 import { completedTaskReducer } from './state/completedTasks/completed-task.reducer';
 import { taskReducer } from './state/tasks/task.reducer';
 import { TaskEffects } from './state/tasks/task.effects';
+import { LevelingComponent } from './components/leveling/leveling.component';
 
 
 @NgModule({
@@ -68,7 +69,8 @@ import { TaskEffects } from './state/tasks/task.effects';
     CharacterTaskListItemComponent,
     CharacterListItemComponent,
     TaskListItemComponent,
-    SortPipe
+    SortPipe,
+    LevelingComponent
   ],
   imports: [
     BrowserModule,
