@@ -9,6 +9,7 @@ import { CharactersComponent } from '../components/characters/characters.compone
 import { TaskFormComponent } from '../components/tasks/task-form/task-form.component';
 import { CharacterFormComponent } from '../components/characters/character-form/character-form.component';
 import { CharacterTasksComponent } from '../components/home/character-tasks/character-tasks.component';
+import { LevelingComponent } from '../components/leveling/leveling.component';
 
 const routes: Routes = [
     {
@@ -28,14 +29,14 @@ const routes: Routes = [
             {
                 path: 'home',
                 component: HomeComponent,
-                children:[
+                children: [
                     {
                         path: ':id',
                         component: CharacterTasksComponent
                     },
                     {
                         path: '',
-                        pathMatch:"full",
+                        pathMatch: "full",
                         component: CharacterTasksComponent
                     }
                 ]
@@ -73,6 +74,10 @@ const routes: Routes = [
                         component: CharactersComponent
                     }
                 ]
+            },
+            {
+                path: 'leveling',
+                component: LevelingComponent
             }
         ]
     }
